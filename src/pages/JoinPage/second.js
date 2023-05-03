@@ -1,72 +1,78 @@
 import React from "react";
-import styled from "styled-components";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { useNavigate } from "react-router";
 
 export default function JoinPageSecond() {
     return (
-        <Container>
-            <div>
-                <Title>회원가입</Title>
+        <div>
+            <div class="flex items-center justify-center w-screen h-screen bg-gray-100">
+                <div class="flex-col items-center w-full h-3/4 p-6 bg-white rounded shadow lg:w-2/5">
+                    <div class="text-2xl font-medium mt-3 text-center">
+                        회원가입
+                    </div>
+                    <form className="flex flex-col" action="/join/step2">
+                        <div class="grid m-10">
+                            <div>
+                                <label
+                                    for="id"
+                                    class="block text-base font-medium leading-6 text-gray-900"
+                                >
+                                    아이디를 입력하세요
+                                </label>
+                                <div class="mt-2.5 mb-7">
+                                    <input
+                                        type="text"
+                                        name="id"
+                                        id="id"
+                                        autocomplete="given-id"
+                                        class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    for="id"
+                                    class="block text-base font-medium leading-6 text-gray-900"
+                                >
+                                    비밀번호를 입력하세요
+                                </label>
+                                <div class="mt-2.5 mb-7">
+                                    <input
+                                        type="text"
+                                        name="id"
+                                        id="id"
+                                        autocomplete="given-id"
+                                        class="block w-full rounded-md border-0 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    for="id"
+                                    class="block text-base font-medium leading-6 text-gray-900"
+                                >
+                                    비밀번호를 재입력하세요
+                                </label>
+                                <div class="mt-2.5">
+                                    <input
+                                        type="text"
+                                        name="id"
+                                        id="id"
+                                        autocomplete="given-id"
+                                        class="block w-full rounded-md border-0 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="m-10">
+                            <button
+                                type="submit"
+                                class="flex w-full justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                                next
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-            <Box
-                component="form"
-                sx={{
-                    "& .MuiTextField-root": { m: 1, width: "25ch" },
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                <div>
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="ㅜ"
-                        defaultValue="이름을 입력하세요."
-                    />
-                </div>
-                <div>
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Password"
-                        defaultValue="비밀번호을 입력하세요."
-                    />
-                </div>
-                <div>
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Password"
-                        defaultValue="비밀번호을 재입력하세요."
-                    />
-                </div>
-                <Button variant="contained" size="large">
-                    다음
-                </Button>
-            </Box>
-        </Container>
+        </div>
     );
 }
-
-const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    width: 35vw;
-    height: 80vh;
-    margin: 0 auto;
-    background-color: lightgray;
-    margin-top: 4.3rem;
-    border-radius: 0.4rem;
-    padding: 20px 0;
-    border: 0.1rem solid lightgray;
-    background-color: white;
-`;
-
-const Title = styled.div`
-    display: block;
-    font-size: 1.5rem;
-`;
