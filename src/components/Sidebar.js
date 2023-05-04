@@ -1,21 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFolderClosed } from "@fortawesome/free-regular-svg-icons";
-import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+
 import React from "react";
 
-export default function Sidebar() {
-    const menus = [
-        { name: "프로젝트 조회", path: "/project" },
-        { name: "평가", path: "/evaluation" },
-        { name: "마이페이지", path: "/mypage" },
-    ];
-
-    const icons = [
-        { name: faFolderClosed },
-        { name: faChartSimple },
-        { name: faUser },
-    ];
+export default function Sidebar({ menus, icons }) {
     // <FontAwesomeIcon icon={faPen} />;
     return (
         <div class="w-1/5 h-screen  border-r-2 border-gray-300">
