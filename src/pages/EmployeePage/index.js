@@ -1,10 +1,12 @@
 import React from "react";
 import Header from "../../components/Header";
+import Sidebar from "../../components/Sidebar";
 export default function EmployeePage() {
     return (
         <div>
             <Header></Header>
-            <h1>employee</h1>
+
+            <Sidebar></Sidebar>
         </div>
     );
 }
