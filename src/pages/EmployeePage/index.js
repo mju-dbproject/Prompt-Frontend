@@ -20,7 +20,12 @@ export default function EmployeePage() {
         <div>
             <Header></Header>
 
-            <Sidebar menus={menus} icons={icons}></Sidebar>
+            <div className="w-1/5 h-screen  border-r-2 border-gray-300 bg-gray-700">
+                <Sidebar menus={menus} icons={icons}></Sidebar>
+            </div>
+            <div className="h-screen bg-blue-400">
+                <div>안녕하세요 만나서 반가와요</div>
+            </div>
         </div>
     );
 }
