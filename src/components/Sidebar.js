@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Sidebar({ menus, icons }) {
     return (
-        <div className="">
+        <div className="border-r-2 border-gray-300">
             {menus.map((name, index) => (
                 <div key={name} className="mb-5 pt-10 px-8">
                     <button>

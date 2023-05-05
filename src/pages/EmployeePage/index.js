@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import { faFolderClosed } from "@fortawesome/free-regular-svg-icons";
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+
 export default function EmployeePage() {
     const menus = [
         { name: "프로젝트 조회", path: "/project" },
@@ -16,15 +17,30 @@ export default function EmployeePage() {
         { name: faChartSimple },
         { name: faUser },
     ];
+
+    // const [subNav, setSubNav] = useState[""];
+
     return (
         <div>
             <Header></Header>
 
-            <div className="w-1/5 h-screen  border-r-2 border-gray-300 bg-gray-700">
+            <div className="grid grid-cols-5">
                 <Sidebar menus={menus} icons={icons}></Sidebar>
-            </div>
-            <div className="h-screen bg-blue-400">
-                <div>안녕하세요 만나서 반가와요</div>
+                <div className="col-span-4 h-screen px-16 py-10">
+                    <section className="subNav w-6/7 grid grid-cols-5 bg-gray-300 h-1/5 rounded pl-7">
+                        <div className="bg-gray-100 m-5 rounded">
+                            <div className="ml-5 mt-3">전체</div>
+                            <div className="text-2xl text-center">12</div>
+                        </div>
+                        <div className="bg-gray-100 m-5 rounded"></div>
+                        <div className="bg-gray-100 m-5 rounded"> </div>
+                    </section>
+                    <section className="w-6/7 h-16 mt-5 flex flex-col justify-center bg-gray-300 rounded">
+                        <div>기간</div>
+                        <input type="date"></input>
+                    </section>
+                    <section></section>
+                </div>
             </div>
         </div>
     );
