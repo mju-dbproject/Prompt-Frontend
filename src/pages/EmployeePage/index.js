@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import { faFolderClosed } from "@fortawesome/free-regular-svg-icons";
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import Calendar from "short-react-calendar";
 
 export default function EmployeePage() {
     const menus = [
@@ -19,6 +20,12 @@ export default function EmployeePage() {
     ];
 
     // const [subNav, setSubNav] = useState[""];
+
+    const [date, setDate] = useState(new Date());
+
+    const onChange = (date) => {
+        setDate({ date });
+    };
 
     return (
         <div>
@@ -37,7 +44,12 @@ export default function EmployeePage() {
                     </section>
                     <section className="w-6/7 h-16 mt-5 flex flex-col justify-center bg-gray-300 rounded">
                         <div>기간</div>
-                        <input type="date"></input>
+                        <Calendar
+                            onChange={onChange}
+                            value={date}
+                            calendarType="US"
+                            oneWeekCalendar={true}
+                        />
                     </section>
                     <section></section>
                 </div>
