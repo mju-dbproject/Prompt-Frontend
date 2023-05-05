@@ -4,7 +4,10 @@ import Sidebar from "../../components/Sidebar";
 import { faFolderClosed } from "@fortawesome/free-regular-svg-icons";
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import Calendar from "short-react-calendar";
+import DatePicker from "react-datepicker";
+import { ko } from "date-fns/esm/locale";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function EmployeePage() {
     const menus = [
@@ -21,11 +24,10 @@ export default function EmployeePage() {
 
     // const [subNav, setSubNav] = useState[""];
 
-    const [date, setDate] = useState(new Date());
+    // const [startDate, setStartDate] = useState(new Date("2021/08/27"));
+    const [startDate, setStartDate] = useState(new Date());
 
-    const onChange = (date) => {
-        setDate({ date });
-    };
+    const [endDate, setEndDate] = useState(new Date());
 
     return (
         <div>
@@ -42,14 +44,33 @@ export default function EmployeePage() {
                         <div className="bg-gray-100 m-5 rounded"></div>
                         <div className="bg-gray-100 m-5 rounded"> </div>
                     </section>
-                    <section className="w-6/7 h-16 mt-5 flex flex-col justify-center bg-gray-300 rounded">
-                        <div>기간</div>
-                        <Calendar
-                            onChange={onChange}
-                            value={date}
-                            calendarType="US"
-                            oneWeekCalendar={true}
-                        />
+                    <section className="flex w-6/7 h-16 mt-5 pl-5 bg-gray-300 rounded">
+                        <div className="flex items-center">
+                            <div className="whitespace-nowrap mr-5 w-10">
+                                기간
+                            </div>
+                            <DatePicker
+                                dateFormat="yyyy년 MM월 dd일"
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                selectsStart
+                                startDate={startDate}
+                                endDate={endDate}
+                                locale={ko}
+                                className="rounded text-center w-40 py-1 px-3 border-2 border-blue-200"
+                            />
+                            <span>~&nbsp;</span>
+                            <DatePicker
+                                dateFormat="yyyy년 MM월 dd일"
+                                selected={endDate}
+                                onChange={(date) => setEndDate(date)}
+                                selectsEnd
+                                startDate={startDate}
+                                endDate={endDate}
+                                locale={ko}
+                                className="rounded text-center w-40 py-1 px-3 border-2 border-blue-200"
+                            />
+                        </div>
                     </section>
                     <section></section>
                 </div>
