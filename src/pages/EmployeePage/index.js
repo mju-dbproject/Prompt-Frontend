@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import Main from "../../components/Main";
 
-import { faFolderClosed } from "@fortawesome/free-regular-svg-icons";
+import { faFolderClosed } from "@fortawesome/free-solid-svg-icons";
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 import "react-datepicker/dist/react-datepicker.css";
-
-import Table from "../../components/Table";
 
 export default function EmployeePage() {
     const menus = [
@@ -21,7 +19,7 @@ export default function EmployeePage() {
     const icons = [
         { name: faFolderClosed },
         { name: faChartSimple },
-        { name: faUser },
+        { name: faHouse },
     ];
 
     // const [subNav, setSubNav] = useState[""];

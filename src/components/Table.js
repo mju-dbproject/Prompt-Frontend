@@ -4,7 +4,7 @@ export default function Table() {
     return (
         <div>
             <section className="w-6/7 border-2 border-blue-400 h-1/2 rounded p-10  mt-5">
-                <table class="table-auto w-full">
+                <table class="table-fixed w-full max-h-screen">
                     <thead className="border-b-2 border-blue-500">
                         <tr>
                             <th>발주처명</th>
