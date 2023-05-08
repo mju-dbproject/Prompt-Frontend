@@ -1,9 +1,26 @@
-import React from "react";
+import { React, useEffect, useRef } from "react";
+import Stepper from "bs-stepper";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bs-stepper/dist/css/bs-stepper.min.css";
 
 export default function JoinPageFirst() {
     const handleSubmit = (e) => {
         e.preventDefault();
     };
+
+    const stepperRef = useRef(null);
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+    };
+
+    useEffect(() => {
+        stepperRef.current = new Stepper(document.querySelector("#stepper1"), {
+            linear: false,
+            animation: true,
+        });
+    }, []);
+
     return (
         <div>
             <div className="flex items-center justify-center w-screen h-screen bg-gray-100">
@@ -11,6 +28,103 @@ export default function JoinPageFirst() {
                     <div className="text-2xl font-medium mt-3 text-center">
                         회원가입
                     </div>
+
+                    <div>
+                        <div id="stepper1" className="bs-stepper">
+                            <div className="bs-stepper-header">
+                                <div className="step" data-target="#test-l-1">
+                                    <button className="step-trigger">
+                                        <span className="bs-stepper-circle">
+                                            1
+                                        </span>
+                                        <span className="bs-stepper-label">
+                                            Email
+                                        </span>
+                                    </button>
+                                </div>
+                                <div className="line"></div>
+                                <div className="step" data-target="#test-l-2">
+                                    <button className="step-trigger">
+                                        <span className="bs-stepper-circle">
+                                            2
+                                        </span>
+                                        <span className="bs-stepper-label">
+                                            Password
+                                        </span>
+                                    </button>
+                                </div>
+                                <div className="line"></div>
+                                <div className="step" data-target="#test-l-3">
+                                    <button className="step-trigger">
+                                        <span className="bs-stepper-circle">
+                                            3
+                                        </span>
+                                        <span className="bs-stepper-label">
+                                            Validate
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="bs-stepper-content">
+                                <form onSubmit={onSubmit}>
+                                    <div id="test-l-1" className="content">
+                                        <div className="form-group">
+                                            <label htmlFor="exampleInputEmail1">
+                                                Email address
+                                            </label>
+                                            <input
+                                                type="email"
+                                                className="form-control"
+                                                id="exampleInputEmail1"
+                                                placeholder="Enter email"
+                                            />
+                                        </div>
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={() =>
+                                                stepperRef.current.next()
+                                            }
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                    <div id="test-l-2" className="content">
+                                        <div className="form-group">
+                                            <label htmlFor="exampleInputPassword1">
+                                                Password
+                                            </label>
+                                            <input
+                                                type="password"
+                                                className="form-control"
+                                                id="exampleInputPassword1"
+                                                placeholder="Password"
+                                            />
+                                        </div>
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={() =>
+                                                stepperRef.current.next()
+                                            }
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                    <div
+                                        id="test-l-3"
+                                        className="content text-center"
+                                    >
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary mt-5"
+                                        >
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <form className="flex flex-col">
                         <div className="grid m-10">
                             <div>
