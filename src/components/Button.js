@@ -6,7 +6,11 @@ export default function Button({ value, name }) {
     const navigate = useNavigate();
 
     const handleNavi = () => {
-        navigate(`/${name}`);
+        if (name === "logout") {
+            navigate("/");
+        } else {
+            navigate(`/${name}`);
+        }
     };
     return (
         <div>
