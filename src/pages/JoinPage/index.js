@@ -88,7 +88,7 @@ export default function JoinPage() {
                                             </div>
 
                                             <label
-                                                for="id"
+                                                for="password"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
                                                 비밀번호를 입력하세요
@@ -122,26 +122,26 @@ export default function JoinPage() {
 
                                         <button
                                             type="submit"
-                                            className="flex w-full mt-44 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            className="flex w-full mt-48 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                             onClick={() =>
                                                 stepperRef.current.next()
                                             }
                                         >
-                                            next
+                                            다음
                                         </button>
                                     </div>
                                     <div id="test-l-2" className="content">
                                         <div className="form-group mt-2">
                                             <label
-                                                for="id"
+                                                for="name"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
                                                 이름을 입력하세요
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <input
-                                                    type="text"
-                                                    name="id"
+                                                    type="name"
+                                                    name="name"
                                                     id="id"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -149,65 +149,78 @@ export default function JoinPage() {
                                             </div>
 
                                             <label
-                                                for="id"
+                                                for="registration-number"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
                                                 주민등록번호를 입력하세요
+                                                (-제외)
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <input
                                                     type="password"
-                                                    name="password"
-                                                    id="password"
+                                                    name="registration-number"
+                                                    id="registration-number"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
 
                                             <label
-                                                for="repassword"
+                                                for="email"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
                                                 이메일을 입력하세요
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <input
-                                                    type="password"
-                                                    name="repassword"
-                                                    id="repassword"
+                                                    type="email"
+                                                    name="email"
+                                                    id="email"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
                                             <label
-                                                for="repassword"
+                                                for="phone-number"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
-                                                전화번호를 입력하세요
+                                                전화번호를 입력하세요 (-제외)
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <input
-                                                    type="password"
-                                                    name="repassword"
-                                                    id="repassword"
+                                                    type="text"
+                                                    name="phone-number"
+                                                    id="phone-number"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
                                             <label
-                                                for="repassword"
+                                                for="education"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
                                                 최종학력을 선택하세요
                                             </label>
                                             <div className="mt-2 mb-4">
-                                                <input
-                                                    type="password"
-                                                    name="repassword"
-                                                    id="repassword"
-                                                    autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
+                                                <select
+                                                    id="education"
+                                                    name="education"
+                                                    placeholder=""
+                                                    className="px-2 block w-full rounded-md border-0 px py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                >
+                                                    <option value="1">
+                                                        고등학교
+                                                    </option>
+                                                    <option value="2">
+                                                        대학교
+                                                    </option>
+                                                    <option value="3">
+                                                        석사
+                                                    </option>
+                                                    <option value="4">
+                                                        박사
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                         <button
@@ -217,13 +230,13 @@ export default function JoinPage() {
                                                 stepperRef.current.next()
                                             }
                                         >
-                                            next
+                                            다음
                                         </button>
                                     </div>
                                     <div id="test-l-3" className="content">
                                         <div className="form-group mt-2">
                                             <label
-                                                for="id"
+                                                for="experience-year"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
                                                 경력년수를 입력하세요
@@ -231,62 +244,86 @@ export default function JoinPage() {
                                             <div className="mt-2 mb-4">
                                                 <input
                                                     type="text"
-                                                    name="id"
-                                                    id="id"
+                                                    name="experience-year"
+                                                    id="experience-year"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
 
                                             <label
-                                                for="id"
+                                                for="position"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
                                                 포지션을 선택하세요
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <select
+                                                    id="position"
+                                                    name="position"
                                                     placeholder=""
                                                     className="px-2 block w-full rounded-md border-0 px py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 >
-                                                    <option>개발자</option>
-                                                    <option>영업관리</option>
-                                                    <option>경영관리</option>
-                                                    <option>사업관리</option>
-                                                    <option>마케팅</option>
-                                                    <option>연구개발</option>
+                                                    <option value="1">
+                                                        개발자
+                                                    </option>
+                                                    <option value="2">
+                                                        영업관리
+                                                    </option>
+                                                    <option value="3">
+                                                        경영관리
+                                                    </option>
+                                                    <option value="4">
+                                                        사업관리
+                                                    </option>
+                                                    <option value="5">
+                                                        마케팅
+                                                    </option>
+                                                    <option value="6">
+                                                        연구개발
+                                                    </option>
                                                 </select>
                                             </div>
 
                                             <label
-                                                for="repassword"
+                                                for="rank"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
                                                 직급을 선택하세요
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <select
+                                                    id="rank"
+                                                    name="rank"
                                                     placeholder=""
                                                     className="px-2 block w-full rounded-md border-0 px py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 >
-                                                    <option>수석</option>
-                                                    <option>책임</option>
-                                                    <option>선임</option>
-                                                    <option>전임</option>
+                                                    <option value="1">
+                                                        수석
+                                                    </option>
+                                                    <option value="2">
+                                                        책임
+                                                    </option>
+                                                    <option value="3">
+                                                        선임
+                                                    </option>
+                                                    <option value="4">
+                                                        전임
+                                                    </option>
                                                 </select>
                                             </div>
 
                                             <label
-                                                for="repassword"
+                                                for="skill"
                                                 className="block text-base font-medium leading-6 text-gray-900"
                                             >
                                                 스킬을 입력하세요
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <input
-                                                    type="password"
-                                                    name="repassword"
-                                                    id="repassword"
+                                                    type="text"
+                                                    name="skill"
+                                                    id="skill"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />

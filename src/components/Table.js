@@ -3,9 +3,9 @@ import React from "react";
 export default function Table() {
     return (
         <div>
-            <section className="w-6/7 border-2 border-blue-400 h-1/2 rounded p-10  mt-5">
+            <section className="w-6/7 border-2 border-gray-300 h-1/2 rounded p-3 mt-3">
                 <table class="table-fixed w-full max-h-screen">
-                    <thead className="border-b-2 border-blue-500">
+                    <thead className="border-b-2 border-gray-300">
                         <tr>
                             <th>발주처명</th>
                             <th>프로젝트명</th>

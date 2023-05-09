@@ -19,7 +19,7 @@ export default function LoginPage() {
                         <div className="grid m-10">
                             <div>
                                 <label
-                                    for="id"
+                                    for="userid"
                                     className="block text-base font-medium leading-6 text-gray-900"
                                 >
                                     아이디를 입력하세요
@@ -27,8 +27,8 @@ export default function LoginPage() {
                                 <div className="mt-2.5 mb-7">
                                     <input
                                         type="text"
-                                        name="id"
-                                        id="id"
+                                        name="userid"
+                                        id="userid"
                                         autocomplete="given-id"
                                         class="block w-full rounded-md border-0 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />

@@ -24,7 +24,7 @@ export default function Search() {
 
     const [searchResults, setSearchResults] = useState([]);
     return (
-        <section className="flex items-center w-6/7 h-16 mt-5 pl-5 bg-gray-300 rounded">
+        <section className="flex items-center w-6/7 h-16 mt-3 pl-5 bg-gray-300 rounded">
             <div className="period">
                 <div className="flex items-center">
                     <div className="whitespace-nowrap mr-5 w-10">기간</div>
