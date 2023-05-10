@@ -8,6 +8,8 @@ import { useLocation } from "react-router";
 
 import { useDebounce } from "../hooks/useDebounce";
 
+import "./Search.css";
+
 export default function Search() {
     const [startDate, setStartDate] = useState(new Date());
 
@@ -24,10 +26,11 @@ export default function Search() {
 
     const [searchResults, setSearchResults] = useState([]);
     return (
-        <section className="flex items-center w-6/7 h-16 mt-3 pl-5 bg-gray-300 rounded">
-            <div className="period">
-                <div className="flex items-center">
+        <section className="flex items-center place-content-between h-16 mt-3 px-5 border-2 border-slate-200 rounded">
+            <div className="period mr-44">
+                <div className="flex items-center w-1/2">
                     <div className="whitespace-nowrap mr-5 w-10">기간</div>
+
                     <DatePicker
                         dateFormat="yyyy년 MM월 dd일"
                         selected={startDate}
@@ -36,9 +39,9 @@ export default function Search() {
                         startDate={startDate}
                         endDate={endDate}
                         locale={ko}
-                        className="rounded text-center w-40 py-1 px-3 border-2 border-blue-200"
+                        className="rounded text-center w-40 py-1 px-3 border-2 border-blue-400"
                     />
-                    <span>~&nbsp;</span>
+                    <span>&nbsp;~&nbsp;</span>
                     <DatePicker
                         dateFormat="yyyy년 MM월 dd일"
                         selected={endDate}
@@ -47,12 +50,15 @@ export default function Search() {
                         startDate={startDate}
                         endDate={endDate}
                         locale={ko}
-                        className="rounded text-center w-40 py-1 px-3 border-2 border-blue-200"
+                        className="rounded text-center w-40 py-1 px-3 border-2 border-blue-400"
                     />
                 </div>
             </div>
-            <div className="search ml-44 max-w-lg">
-                <select placeholder="검색조건" className="p-1 rounded">
+            <div className="search w-1/2 justify-self-stretch lg:hidden xl:inline-block xl:max-w-xl">
+                <select
+                    placeholder="검색조건"
+                    className="p-1 rounded border-2 border-blue-400"
+                >
                     <option>발주처명</option>
                     <option>프로젝트명</option>
                     <option>시작일자</option>
@@ -61,11 +67,13 @@ export default function Search() {
                 </select>
 
                 <input
-                    className="mx-3 p-0.5 rounded"
-                    value={searchTerm}
+                    className="mx-3 p-0.5 rounded border-2 border-blue-400"
                     type="text"
                 ></input>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                <FontAwesomeIcon
+                    className="search-icon"
+                    icon={faMagnifyingGlass}
+                />
             </div>
         </section>
     );

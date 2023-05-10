@@ -1,0 +1,16 @@
+@media (max-width: 1420px) {
+    .search-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 1410px) {
+    .search {
+        margin: 0;
+        padding: 0;
+        width: fit-content;
+    }
+    .search select {
+        display: none;
+    }
+}

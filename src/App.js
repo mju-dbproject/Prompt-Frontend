@@ -6,6 +6,7 @@ import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import EmployeePage from "./pages/EmployeePage";
 import JoinPage from "./pages/JoinPage";
+import MyPage from "./pages/MyPage";
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/join" element={<JoinPage />} />
                 <Route path="/employee" element={<EmployeePage />} />
+                <Route path="/mypage" element={<MyPage />} />
             </Routes>
         </div>
     );
