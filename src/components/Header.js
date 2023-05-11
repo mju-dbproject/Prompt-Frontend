@@ -10,7 +10,7 @@ export default function Header() {
                 aria-label="Global"
             >
                 <a
-                    href="#"
+                    href="/employee"
                     className="text-xl font-semibold leading-5 text-gray-900 no-underline"
                 >
                     (주) 프람트 솔루션

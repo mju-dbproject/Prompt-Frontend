@@ -83,7 +83,7 @@ export default function JoinPage() {
                                                     name="id"
                                                     id="id"
                                                     autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
 
@@ -99,7 +99,7 @@ export default function JoinPage() {
                                                     name="password"
                                                     id="password"
                                                     autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
 
@@ -115,7 +115,7 @@ export default function JoinPage() {
                                                     name="repassword"
                                                     id="repassword"
                                                     autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
                                         </div>
@@ -144,7 +144,7 @@ export default function JoinPage() {
                                                     name="name"
                                                     id="id"
                                                     autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
 
@@ -161,7 +161,7 @@ export default function JoinPage() {
                                                     name="registration-number"
                                                     id="registration-number"
                                                     autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
 
@@ -177,7 +177,7 @@ export default function JoinPage() {
                                                     name="email"
                                                     id="email"
                                                     autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
                                             <label
@@ -192,7 +192,7 @@ export default function JoinPage() {
                                                     name="phone-number"
                                                     id="phone-number"
                                                     autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
                                             <label
@@ -206,7 +206,7 @@ export default function JoinPage() {
                                                     id="education"
                                                     name="education"
                                                     placeholder=""
-                                                    className="px-2 block w-full rounded-md border-0 px py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 >
                                                     <option value="1">
                                                         고등학교
@@ -247,7 +247,7 @@ export default function JoinPage() {
                                                     name="experience-year"
                                                     id="experience-year"
                                                     autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
 
@@ -262,7 +262,7 @@ export default function JoinPage() {
                                                     id="position"
                                                     name="position"
                                                     placeholder=""
-                                                    className="px-2 block w-full rounded-md border-0 px py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 >
                                                     <option value="1">
                                                         개발자
@@ -296,7 +296,7 @@ export default function JoinPage() {
                                                     id="rank"
                                                     name="rank"
                                                     placeholder=""
-                                                    className="px-2 block w-full rounded-md border-0 px py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 >
                                                     <option value="1">
                                                         수석
@@ -325,7 +325,7 @@ export default function JoinPage() {
                                                     name="skill"
                                                     id="skill"
                                                     autocomplete="given-id"
-                                                    className="block w-full rounded-md border-0 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
                                         </div>
