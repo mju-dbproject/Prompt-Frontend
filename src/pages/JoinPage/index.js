@@ -16,6 +16,15 @@ export default function JoinPage() {
         e.preventDefault();
     };
 
+    // const [userId, setUserId] = useState("");
+
+    // useEffect(() => {
+    //     axios
+    //         .get("/employee/join")
+    //         .then((response) => setUserId(response.data.userid))
+    //         .catch((error) => console.log(error));
+    // }, []);
+
     useEffect(() => {
         stepperRef.current = new Stepper(document.querySelector("#stepper1"), {
             linear: false,
