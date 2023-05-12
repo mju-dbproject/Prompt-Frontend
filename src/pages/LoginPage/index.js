@@ -1,13 +1,30 @@
-import React from "react";
-import { useNavigate } from "react-router";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate("/employee");
+    const [userId, setUserId] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = () => {
+        fetch("http://localhost:3000/user/info", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+                userId: userId,
+                password: password,
+            }),
+        })
+            .then((res) => res.json())
+            .then(() => console.log("success"))
+            .then((json) => localStorage.setItem("token", json.token));
     };
+
     return (
         <div>
             <div className="flex items-center justify-center w-screen h-screen bg-gray-100">
@@ -31,6 +48,9 @@ export default function LoginPage() {
                                         id="userid"
                                         autocomplete="given-id"
                                         className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        onChange={(e) =>
+                                            setUserId(e.target.value)
+                                        }
                                     />
                                 </div>
                             </div>
@@ -48,6 +68,9 @@ export default function LoginPage() {
                                         id="password"
                                         autocomplete="given-id"
                                         className="block w-full rounded-md border border-zinc-300 px py-2  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
                                     />
                                 </div>
                             </div>
