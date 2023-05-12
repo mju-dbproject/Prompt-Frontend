@@ -3,10 +3,10 @@ import Button from "./Button";
 
 export default function Header() {
     return (
-        <header className="grid grid-cols-5 border-b-2 border-gray-300">
+        <header className="grid grid-cols-6 w-full border-b-2 border-gray-300">
             <div className="col-span-1 border-r-2 border-gray-300"></div>
             <div
-                className="col-span-4 flex items-center p-3 lg:px-8"
+                className="col-span-5 flex items-center p-3 lg:px-8"
                 aria-label="Global"
             >
                 <a

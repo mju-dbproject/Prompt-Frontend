@@ -5,7 +5,7 @@ import Table from "./Table";
 
 export default function Main() {
     return (
-        <div className="col-span-4 h-screen px-16 py-10">
+        <div className="col-span-5 h-screen px-16 py-10">
             <SubNav></SubNav>
             <Search></Search>
             <Table></Table>

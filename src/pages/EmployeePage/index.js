@@ -37,7 +37,7 @@ export default function EmployeePage() {
         <div>
             <Header></Header>
 
-            <div className="grid grid-cols-5 mx-auto">
+            <div className="grid grid-cols-6 mx-auto">
                 <Sidebar
                     className="col-span-1"
                     menus={menus}

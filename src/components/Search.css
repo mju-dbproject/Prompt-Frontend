@@ -14,3 +14,14 @@
         display: none;
     }
 }
+@media (max-width: 1020px) {
+    .search input {
+        display: none;
+    }
+
+    @media (max-width: 705px) {
+        .period {
+            display: none;
+        }
+    }
+}
