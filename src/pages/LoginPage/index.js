@@ -37,8 +37,9 @@ export default function LoginPage() {
                 password: password,
             }),
         })
+            .then(() => console.log("success"))
             .then((res) => console.log(res))
-            .then(() => console.log("success"));
+            .then(navigate("/employee"));
     };
 
     return (
@@ -52,7 +53,7 @@ export default function LoginPage() {
                         <div className="grid m-10">
                             <div>
                                 <label
-                                    for="userid"
+                                    htmlFor="userid"
                                     className="block text-base font-medium leading-6 text-gray-900"
                                 >
                                     아이디를 입력하세요

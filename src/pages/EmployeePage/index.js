@@ -22,6 +22,11 @@ export default function EmployeePage() {
         { name: faHouse },
     ];
 
+    const subTitle = [
+        { title: "전체", total: 12 },
+        { title: "진행", total: 1 },
+        { title: "완료", total: 11 },
+    ];
     // const [subNav, setSubNav] = useState[""];
 
     // const [startDate, setStartDate] = useState(new Date("2021/08/27"));
@@ -43,7 +48,7 @@ export default function EmployeePage() {
                     menus={menus}
                     icons={icons}
                 ></Sidebar>
-                <Main></Main>
+                <Main subTitle={subTitle}></Main>
             </div>
         </div>
     );

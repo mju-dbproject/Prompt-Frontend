@@ -6,14 +6,10 @@ import { useNavigate } from "react-router";
 export default function Sidebar({ menus, icons }) {
     const navigate = useNavigate();
 
-    const handleNavi = (path) => {
-        navigate(`${path}`);
-    };
-
     return (
         <div className="border-r-2 border-gray-300 h-screen">
             {menus.map((name, index) => (
-                <div key={index} className="mb-5 pt-10 px-8">
+                <div key={index} className="mb-3 pt-10 px-8">
                     <button
                         onClick={() => {
                             navigate(`${menus[index].path}`);

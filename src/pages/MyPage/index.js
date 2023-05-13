@@ -37,6 +37,7 @@ export default function MyPage() {
 
     const fetchGetInfo = async () => {
         const res = await fetch(requests.fetchUserInfo)
+            .then(console.log("success"))
             .then((res) => res.json())
             .then(console.log);
     };
