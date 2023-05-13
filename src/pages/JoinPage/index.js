@@ -3,11 +3,30 @@ import Stepper from "bs-stepper";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bs-stepper/dist/css/bs-stepper.min.css";
 
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import "./join.css";
 
 export default function JoinPage() {
+    const [pwType, setPwType] = useState({
+        type: "password",
+        visible: false,
+        icon: faEye,
+    });
+
     const handleSubmit = (e) => {
         e.preventDefault();
+    };
+
+    const handlePasswordType = (e) => {
+        setPwType(() => {
+            if (!pwType.visible) {
+                return { type: "text", visible: true, icon: faEyeSlash };
+            } else {
+                return { type: "password", visible: false, icon: faEye };
+            }
+        });
     };
 
     const stepperRef = useRef(null);
@@ -91,6 +110,11 @@ export default function JoinPage() {
                                                     id="id"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    onChange={(e) =>
+                                                        setUserId(
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
 
@@ -100,13 +124,23 @@ export default function JoinPage() {
                                             >
                                                 비밀번호를 입력하세요
                                             </label>
-                                            <div className="mt-2.5 mb-7">
+                                            <div className="mt-2.5 mb-7 relative">
                                                 <input
-                                                    type="password"
+                                                    type={pwType.type}
                                                     name="password"
                                                     id="password"
-                                                    autocomplete="given-id"
+                                                    autocomplete="given-password"
                                                     className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    onChange={(e) =>
+                                                        setPassword(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+                                                <FontAwesomeIcon
+                                                    icon={pwType.icon}
+                                                    className="absolute top-4 right-3 mb-1.5 text-gray-500"
+                                                    onClick={handlePasswordType}
                                                 />
                                             </div>
 
@@ -116,13 +150,23 @@ export default function JoinPage() {
                                             >
                                                 비밀번호를 재입력하세요
                                             </label>
-                                            <div className="mt-2.5">
+                                            <div className="mt-2.5 relative">
                                                 <input
-                                                    type="password"
+                                                    type={pwType.type}
                                                     name="repassword"
                                                     id="repassword"
-                                                    autocomplete="given-id"
+                                                    autocomplete="given-password"
                                                     className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    onChange={(e) =>
+                                                        setPassword(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+                                                <FontAwesomeIcon
+                                                    icon={pwType.icon}
+                                                    className="absolute top-4 right-3 mb-1.5 text-gray-500"
+                                                    onClick={handlePasswordType}
                                                 />
                                             </div>
                                         </div>
