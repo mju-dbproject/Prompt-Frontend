@@ -55,8 +55,6 @@ export default function JoinPage() {
     const [rank, setRank] = useState("");
     const [skill, setSkill] = useState("");
 
-    useEffect(() => {});
-
     useEffect(() => {
         stepperRef.current = new Stepper(document.querySelector("#stepper1"), {
             linear: false,
@@ -210,8 +208,8 @@ export default function JoinPage() {
                                                 <input
                                                     type="name"
                                                     name="name"
-                                                    id="id"
-                                                    autocomplete="given-id"
+                                                    id="name"
+                                                    autocomplete="given-name"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     onChange={(e) => {
                                                         setName(e.target.value);
@@ -231,7 +229,7 @@ export default function JoinPage() {
                                                     type="password"
                                                     name="registration-number"
                                                     id="registration-number"
-                                                    autocomplete="given-id"
+                                                    autocomplete="given-registration-number"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     onClick={(e) =>
                                                         setRegisterationNumber(
@@ -252,7 +250,7 @@ export default function JoinPage() {
                                                     type="email"
                                                     name="email"
                                                     id="email"
-                                                    autocomplete="given-id"
+                                                    autocomplete="given-email"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     onClick={(e) =>
                                                         setEmail(e.target.value)
@@ -270,7 +268,7 @@ export default function JoinPage() {
                                                     type="text"
                                                     name="phone-number"
                                                     id="phone-number"
-                                                    autocomplete="given-id"
+                                                    autocomplete="given-phone-number"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     onClick={(e) =>
                                                         setPhoneNumber(
@@ -333,8 +331,13 @@ export default function JoinPage() {
                                                     type="text"
                                                     name="experience-year"
                                                     id="experience-year"
-                                                    autocomplete="given-id"
+                                                    autocomplete="given-experience-year"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    onChange={(e) =>
+                                                        setExperienceYear(
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
 
@@ -409,6 +412,9 @@ export default function JoinPage() {
                                                     id="skill"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    onChange={(e) =>
+                                                        setSkill(e.target.value)
+                                                    }
                                                 />
                                             </div>
                                         </div>
