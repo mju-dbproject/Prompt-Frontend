@@ -3,25 +3,10 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import Main from "../../components/Main";
 
-import { faFolderClosed } from "@fortawesome/free-solid-svg-icons";
-import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
-
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function EmployeePage() {
-    const menus = [
-        { name: "프로젝트 조회", path: "/employee" },
-        { name: "평가", path: "/evaluation" },
-        { name: "마이페이지", path: "/mypage" },
-    ];
-
-    const icons = [
-        { name: faFolderClosed },
-        { name: faChartSimple },
-        { name: faHouse },
-    ];
-
+    const admin = "employee";
     const subTitle = [
         { title: "전체", total: 12 },
         { title: "진행", total: 1 },
@@ -43,11 +28,7 @@ export default function EmployeePage() {
             <Header></Header>
 
             <div className="grid grid-cols-6 mx-auto">
-                <Sidebar
-                    className="col-span-1"
-                    menus={menus}
-                    icons={icons}
-                ></Sidebar>
+                <Sidebar className="col-span-1" admin={admin}></Sidebar>
                 <Main subTitle={subTitle}></Main>
             </div>
         </div>

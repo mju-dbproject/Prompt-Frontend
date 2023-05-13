@@ -39,7 +39,7 @@ export default function LoginPage() {
         })
             .then(() => console.log("success"))
             .then((res) => console.log(res))
-            .then(navigate("/employee"));
+            .then(navigate("/manager"));
     };
 
     return (

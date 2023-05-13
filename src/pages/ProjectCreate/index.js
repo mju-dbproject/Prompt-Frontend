@@ -1,55 +1,10 @@
-import {
-    faChartSimple,
-    faFolderClosed,
-    faHouse,
-} from "@fortawesome/free-solid-svg-icons";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
-import requests from "../../api/requests";
-
-export default function MyPage() {
-    const admin = "employee";
-    const menus = [
-        { name: "프로젝트 조회", path: "/employee" },
-        { name: "평가", path: "/evaluation" },
-        { name: "마이페이지", path: "/employee/mypage" },
-    ];
-
-    const icons = [
-        { name: faFolderClosed },
-        { name: faChartSimple },
-        { name: faHouse },
-    ];
-
+export default function ProjectCreatePage() {
+    const admin = "manager";
     const [isEditing, setIsEditing] = useState(false);
-
-    const [name, setName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [email, setEmail] = useState("");
-    const [rank, setRank] = useState("");
-    const [position, setPosition] = useState("");
-    const [skill, setSkill] = useState("");
-
-    useEffect(() => {
-        fetchGetInfo();
-    }, []);
-
-    const fetchGetInfo = async () => {
-        const res = await fetch(requests.fetchUserInfo)
-            .then(console.log("success"))
-            .then((res) => res.json())
-            .then(console.log);
-    };
-
-    // const fetchPostIndo = async () => {
-
-    // }
-
-    const handleSave = () => {
-        setIsEditing(false);
-    };
 
     if (isEditing) {
         return (
@@ -57,12 +12,7 @@ export default function MyPage() {
                 <Header></Header>
 
                 <div className="grid grid-cols-6 mx-auto">
-                    <Sidebar
-                        className="col-span-1"
-                        menus={menus}
-                        icons={icons}
-                        admin={admin}
-                    ></Sidebar>
+                    <Sidebar className="col-span-1" admin={admin}></Sidebar>
                     <div className="col-span-5 h-screen px-20 pt-10 auto-rows-auto">
                         <div className="container w-5/6 h-4/5 mx-40 rounded border-2 border-slate-200 shadow px-5">
                             <div className="text-2xl font-medium pt-10 pb-4 text-start">
@@ -80,9 +30,6 @@ export default function MyPage() {
                                             id="name"
                                             autocomplete="given-name"
                                             className="w-3/5 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
-                                            onChange={(e) =>
-                                                setName(e.target.value)
-                                            }
                                         ></input>{" "}
                                     </div>
 
@@ -96,9 +43,6 @@ export default function MyPage() {
                                             id="phone-number"
                                             autocomplete="given-phone-number"
                                             className="w-3/5 pl-1 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
-                                            onChange={(e) => {
-                                                setPhoneNumber(e.target.value);
-                                            }}
                                         ></input>{" "}
                                     </div>
                                 </div>
@@ -113,9 +57,6 @@ export default function MyPage() {
                                             id="email"
                                             autocomplete="given-email"
                                             className="w-5/6 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
-                                            onChange={(e) => {
-                                                setEmail(e.target.value);
-                                            }}
                                         ></input>{" "}
                                     </div>
                                 </div>
@@ -149,9 +90,6 @@ export default function MyPage() {
                                             id="skill"
                                             autocomplete="given-skill"
                                             className="w-5/6 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
-                                            onChange={(e) =>
-                                                setSkill(e.target.value)
-                                            }
                                         ></input>{" "}
                                     </div>
                                 </div>
@@ -160,7 +98,6 @@ export default function MyPage() {
                                 <button
                                     type="submit"
                                     className="flex w-1/5 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    onClick={handleSave}
                                 >
                                     저장하기
                                 </button>

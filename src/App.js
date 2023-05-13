@@ -7,6 +7,7 @@ import EmployeePage from "./pages/EmployeePage";
 import JoinPage from "./pages/JoinPage";
 import MyPage from "./pages/MyPage";
 import ManagerPage from "./pages/ManagerPage";
+import ProjectCreatePage from "./pages/ProjectCreate";
 
 const App = () => {
     return (
@@ -16,8 +17,9 @@ const App = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/join" element={<JoinPage />} />
                 <Route path="/employee" element={<EmployeePage />} />
-                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/employee/mypage" element={<MyPage />} />
                 <Route path="/manager" element={<ManagerPage />} />
+                <Route path="/newProject" element={<ProjectCreatePage />} />
             </Routes>
         </div>
     );
