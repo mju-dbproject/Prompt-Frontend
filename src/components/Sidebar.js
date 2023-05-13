@@ -15,7 +15,7 @@ export default function Sidebar({ admin }) {
     let menus = [
         { name: "프로젝트 조회", path: "/employee" },
         { name: "평가", path: "/evaluation" },
-        { name: "마이페이지", path: "/mypage" },
+        { name: "마이페이지", path: `/${admin}/mypage` },
     ];
 
     let icons = [
@@ -34,7 +34,7 @@ export default function Sidebar({ admin }) {
             { name: "프로젝트 관리", path: "/manager" },
             { name: "프로젝트 생성", path: "/mypage" },
             { name: "평가 관리", path: "/evaluation" },
-            { name: "마이페이지", path: "/mypage" },
+            { name: "마이페이지", path: `/${admin}/mypage` },
         ];
 
         icons = [
