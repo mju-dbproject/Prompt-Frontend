@@ -12,6 +12,9 @@ export default function EmployeePage() {
         { title: "진행", total: 1 },
         { title: "완료", total: 11 },
     ];
+
+    const role = admin === "manager" ? "경영인" : "직원";
+
     // const [subNav, setSubNav] = useState[""];
 
     // const [startDate, setStartDate] = useState(new Date("2021/08/27"));
@@ -25,7 +28,7 @@ export default function EmployeePage() {
 
     return (
         <div>
-            <Header></Header>
+            <Header role={role}></Header>
 
             <div className="grid grid-cols-6 mx-auto">
                 <Sidebar className="col-span-1" admin={admin}></Sidebar>

@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 
-export default function Header() {
+export default function Header({ role }) {
     return (
         <header className="grid grid-cols-6 w-full border-b-2 border-gray-300">
             <div className="col-span-1 border-r-2 border-gray-300"></div>
@@ -16,7 +16,7 @@ export default function Header() {
                     (주) 프람트 솔루션
                 </a>
                 <div className="text-base font-normal leading-5 text-gray-600">
-                    &nbsp;(직원/홍길동님)
+                    &nbsp;({role}/홍길동님)
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     <div>

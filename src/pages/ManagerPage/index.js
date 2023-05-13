@@ -11,9 +11,11 @@ export default function ManagerPage() {
         { title: "완료", total: 11 },
     ];
 
+    const role = admin === "manager" ? "경영인" : "직원";
+
     return (
         <div>
-            <Header></Header>
+            <Header role={role}></Header>
 
             <div className="grid grid-cols-6 mx-auto">
                 <Sidebar className="col-span-1" admin={admin}></Sidebar>

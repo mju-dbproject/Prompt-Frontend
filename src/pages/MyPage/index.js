@@ -1,27 +1,21 @@
-import {
-    faChartSimple,
-    faFolderClosed,
-    faHouse,
-} from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useLocation } from "react-router-dom";
 
 import requests from "../../api/requests";
 
 export default function MyPage() {
-    const admin = "employee";
-    const menus = [
-        { name: "프로젝트 조회", path: "/employee" },
-        { name: "평가", path: "/evaluation" },
-        { name: "마이페이지", path: "/employee/mypage" },
-    ];
+    const location = useLocation();
 
-    const icons = [
-        { name: faFolderClosed },
-        { name: faChartSimple },
-        { name: faHouse },
-    ];
+    const [admin, setAdmin] = useState("");
+
+    const role = admin === "manager" ? "경영인" : "직원";
+
+    useEffect(() => {
+        const path = location.pathname.split("/");
+        setAdmin(path[1]);
+    }, [location]);
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -43,10 +37,6 @@ export default function MyPage() {
             .then(console.log);
     };
 
-    // const fetchPostIndo = async () => {
-
-    // }
-
     const handleSave = () => {
         setIsEditing(false);
     };
@@ -54,15 +44,10 @@ export default function MyPage() {
     if (isEditing) {
         return (
             <div>
-                <Header></Header>
+                <Header role={role}></Header>
 
                 <div className="grid grid-cols-6 mx-auto">
-                    <Sidebar
-                        className="col-span-1"
-                        menus={menus}
-                        icons={icons}
-                        admin={admin}
-                    ></Sidebar>
+                    <Sidebar className="col-span-1" admin={admin}></Sidebar>
                     <div className="col-span-5 h-screen px-20 pt-10 auto-rows-auto">
                         <div className="container w-5/6 h-4/5 mx-40 rounded border-2 border-slate-200 shadow px-5">
                             <div className="text-2xl font-medium pt-10 pb-4 text-start">
@@ -173,7 +158,7 @@ export default function MyPage() {
     } else {
         return (
             <div>
-                <Header></Header>
+                <Header role={role}></Header>
 
                 <div className="grid grid-cols-6 mx-auto">
                     <Sidebar className="col-span-1" admin={admin}></Sidebar>
