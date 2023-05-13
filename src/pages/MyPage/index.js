@@ -3,9 +3,12 @@ import {
     faFolderClosed,
     faHouse,
 } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+
+import requests from "../../api/requests";
 
 export default function MyPage() {
     const menus = [
@@ -21,6 +24,31 @@ export default function MyPage() {
     ];
 
     const [isEditing, setIsEditing] = useState(false);
+
+    const [info, setInfo] = useState([]);
+
+    const [name, setName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [email, setEmail] = useState("");
+    const [rank, setRank] = useState("");
+    const [position, setPosition] = useState("");
+    const [skill, setSkill] = useState("");
+
+    useEffect(() => {
+        fetchGetInfo();
+    }, []);
+
+    const fetchGetInfo = async () => {
+        const res = await axios.get(requests.fetchUserInfo).then(console.log);
+    };
+
+    // const fetchPostIndo = async () => {
+
+    // }
+
+    const handleSave = () => {
+        setIsEditing(false);
+    };
 
     if (isEditing) {
         return (
@@ -41,49 +69,52 @@ export default function MyPage() {
                             <div className="divide-y divide-gray-200">
                                 <div className="grid grid-cols-2 gap-2 pt-4 px-0">
                                     <div className="px-2 py-3">
-                                        <form>
-                                            <label className="text-md font-medium leading-6 text-gray-900 mr-10">
-                                                이름
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                id="name"
-                                                autocomplete="given-name"
-                                                className="w-3/5 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
-                                            ></input>{" "}
-                                        </form>
+                                        <label className="text-md font-medium leading-6 text-gray-900 mr-10">
+                                            이름
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            id="name"
+                                            autocomplete="given-name"
+                                            className="w-3/5 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                            onChange={(e) =>
+                                                setName(e.target.value)
+                                            }
+                                        ></input>{" "}
                                     </div>
 
                                     <div className="px-2 py-3">
-                                        <form>
-                                            <label className="text-md font-medium leading-6 text-gray-900 mr-10">
-                                                전화번호
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="phone-number"
-                                                id="phone-number"
-                                                autocomplete="given-phone-number"
-                                                className="w-3/5 pl-1 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
-                                            ></input>{" "}
-                                        </form>
+                                        <label className="text-md font-medium leading-6 text-gray-900 mr-10">
+                                            전화번호
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="phone-number"
+                                            id="phone-number"
+                                            autocomplete="given-phone-number"
+                                            className="w-3/5 pl-1 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                            onChange={(e) => {
+                                                setPhoneNumber(e.target.value);
+                                            }}
+                                        ></input>{" "}
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-1 gap-2 pt-2 px-0">
                                     <div className="px-2 py-3">
-                                        <form>
-                                            <label className="text-md font-medium leading-6 text-gray-900 mr-7">
-                                                이메일
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="email"
-                                                id="email"
-                                                autocomplete="given-email"
-                                                className="w-5/6 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
-                                            ></input>{" "}
-                                        </form>
+                                        <label className="text-md font-medium leading-6 text-gray-900 mr-7">
+                                            이메일
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="email"
+                                            id="email"
+                                            autocomplete="given-email"
+                                            className="w-5/6 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                            onChange={(e) => {
+                                                setEmail(e.target.value);
+                                            }}
+                                        ></input>{" "}
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 pt-2 px-0">
@@ -107,18 +138,19 @@ export default function MyPage() {
                                 </div>
                                 <div className="grid grid-cols-1 gap-2 pt-3 px-0">
                                     <div className="px-2 py-2">
-                                        <form>
-                                            <label className="text-md font-medium leading-6 text-gray-900 mr-10">
-                                                스킬
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="skill"
-                                                id="skill"
-                                                autocomplete="given-skill"
-                                                className="w-5/6 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
-                                            ></input>{" "}
-                                        </form>
+                                        <label className="text-md font-medium leading-6 text-gray-900 mr-10">
+                                            스킬
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="skill"
+                                            id="skill"
+                                            autocomplete="given-skill"
+                                            className="w-5/6 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                            onChange={(e) =>
+                                                setSkill(e.target.value)
+                                            }
+                                        ></input>{" "}
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +158,7 @@ export default function MyPage() {
                                 <button
                                     type="submit"
                                     className="flex w-1/5 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    onClick={() => setIsEditing(false)}
+                                    onClick={handleSave}
                                 >
                                     저장하기
                                 </button>

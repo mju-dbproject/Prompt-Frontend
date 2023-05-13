@@ -20,9 +20,8 @@ export default function LoginPage() {
                 password: password,
             }),
         })
-            .then((res) => res.json())
-            .then(() => console.log("success"))
-            .then((json) => localStorage.setItem("token", json.token));
+            .then((res) => console.log(res))
+            .then(() => console.log("success"));
     };
 
     return (

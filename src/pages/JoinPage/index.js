@@ -1,4 +1,4 @@
-import { React, useEffect, useRef } from "react";
+import { React, useEffect, useRef, useState } from "react";
 import Stepper from "bs-stepper";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bs-stepper/dist/css/bs-stepper.min.css";
@@ -16,14 +16,10 @@ export default function JoinPage() {
         e.preventDefault();
     };
 
-    // const [userId, setUserId] = useState("");
+    const [userId, setUserId] = useState("");
+    const [password, setPassword] = useState("");
 
-    // useEffect(() => {
-    //     axios
-    //         .get("/employee/join")
-    //         .then((response) => setUserId(response.data.userid))
-    //         .catch((error) => console.log(error));
-    // }, []);
+    useEffect(() => {});
 
     useEffect(() => {
         stepperRef.current = new Stepper(document.querySelector("#stepper1"), {
@@ -31,6 +27,8 @@ export default function JoinPage() {
             animation: true,
         });
     }, []);
+
+    // const fetchPostData(
 
     return (
         <div>
