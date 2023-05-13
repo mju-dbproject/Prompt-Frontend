@@ -3,7 +3,6 @@ import {
     faFolderClosed,
     faHouse,
 } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
@@ -25,8 +24,6 @@ export default function MyPage() {
 
     const [isEditing, setIsEditing] = useState(false);
 
-    const [info, setInfo] = useState([]);
-
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
@@ -39,7 +36,9 @@ export default function MyPage() {
     }, []);
 
     const fetchGetInfo = async () => {
-        const res = await axios.get(requests.fetchUserInfo).then(console.log);
+        const res = await fetch(requests.fetchUserInfo)
+            .then((res) => res.json())
+            .then(console.log);
     };
 
     // const fetchPostIndo = async () => {

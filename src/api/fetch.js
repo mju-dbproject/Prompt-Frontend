@@ -1,6 +1,4 @@
-import axios from "axios";
-
-const instance = axios.create({
+const instance = fetch.create({
     baseURL: "http://localhost:3000",
 });
 

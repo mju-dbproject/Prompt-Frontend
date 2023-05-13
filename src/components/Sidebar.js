@@ -13,7 +13,7 @@ export default function Sidebar({ menus, icons }) {
     return (
         <div className="border-r-2 border-gray-300 h-screen">
             {menus.map((name, index) => (
-                <div key={name} className="mb-5 pt-10 px-8">
+                <div key={index} className="mb-5 pt-10 px-8">
                     <button
                         onClick={() => {
                             navigate(`${menus[index].path}`);
