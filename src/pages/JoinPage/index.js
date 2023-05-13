@@ -31,12 +31,29 @@ export default function JoinPage() {
 
     const stepperRef = useRef(null);
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-    };
+    const educationList = ["고등학교", "대학교", "석사", "박사"];
+    const positionList = [
+        "개발자",
+        "영업관리",
+        "경영관리",
+        "사업관리",
+        "마케팅",
+        "연구개발",
+    ];
+    const rankList = ["수석", "책임", "선임", "전임"];
 
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
+    const [repassword, setRepassword] = useState("");
+    const [name, setName] = useState("");
+    const [registrationNumber, setRegisterationNumber] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [education, setEducation] = useState("");
+    const [experienceYear, setExperienceYear] = useState("");
+    const [position, setPosition] = useState("");
+    const [rank, setRank] = useState("");
+    const [skill, setSkill] = useState("");
 
     useEffect(() => {});
 
@@ -94,9 +111,9 @@ export default function JoinPage() {
                                 </div>
                             </div>
                             <div className="bs-stepper-content">
-                                <form onSubmit={onSubmit}>
+                                <form>
                                     <div id="test-l-1" className="content">
-                                        <div className="form-group mt-3">
+                                        <div className="form-group mt-2">
                                             <label
                                                 for="id"
                                                 className="block text-base font-medium leading-6 text-gray-900"
@@ -158,7 +175,7 @@ export default function JoinPage() {
                                                     autocomplete="given-password"
                                                     className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     onChange={(e) =>
-                                                        setPassword(
+                                                        setRepassword(
                                                             e.target.value
                                                         )
                                                     }
@@ -173,7 +190,7 @@ export default function JoinPage() {
 
                                         <button
                                             type="submit"
-                                            className="flex w-full mt-48 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            className="flex w-full mt-44 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                             onClick={() =>
                                                 stepperRef.current.next()
                                             }
@@ -196,6 +213,9 @@ export default function JoinPage() {
                                                     id="id"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    onChange={(e) => {
+                                                        setName(e.target.value);
+                                                    }}
                                                 />
                                             </div>
 
@@ -213,6 +233,11 @@ export default function JoinPage() {
                                                     id="registration-number"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    onClick={(e) =>
+                                                        setRegisterationNumber(
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
 
@@ -229,6 +254,9 @@ export default function JoinPage() {
                                                     id="email"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    onClick={(e) =>
+                                                        setEmail(e.target.value)
+                                                    }
                                                 />
                                             </div>
                                             <label
@@ -244,6 +272,11 @@ export default function JoinPage() {
                                                     id="phone-number"
                                                     autocomplete="given-id"
                                                     className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    onClick={(e) =>
+                                                        setPhoneNumber(
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                             <label
@@ -254,23 +287,26 @@ export default function JoinPage() {
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <select
+                                                    onChange={(e) =>
+                                                        setEducation(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    value={education}
                                                     id="education"
                                                     name="education"
-                                                    placeholder=""
                                                     className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 >
-                                                    <option value="1">
-                                                        고등학교
-                                                    </option>
-                                                    <option value="2">
-                                                        대학교
-                                                    </option>
-                                                    <option value="3">
-                                                        석사
-                                                    </option>
-                                                    <option value="4">
-                                                        박사
-                                                    </option>
+                                                    {educationList.map(
+                                                        (item) => (
+                                                            <option
+                                                                value={item}
+                                                                key={item}
+                                                            >
+                                                                {item}
+                                                            </option>
+                                                        )
+                                                    )}
                                                 </select>
                                             </div>
                                         </div>
@@ -310,29 +346,26 @@ export default function JoinPage() {
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <select
+                                                    onChange={(e) =>
+                                                        setPosition(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    value={position}
                                                     id="position"
                                                     name="position"
-                                                    placeholder=""
                                                     className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 >
-                                                    <option value="1">
-                                                        개발자
-                                                    </option>
-                                                    <option value="2">
-                                                        영업관리
-                                                    </option>
-                                                    <option value="3">
-                                                        경영관리
-                                                    </option>
-                                                    <option value="4">
-                                                        사업관리
-                                                    </option>
-                                                    <option value="5">
-                                                        마케팅
-                                                    </option>
-                                                    <option value="6">
-                                                        연구개발
-                                                    </option>
+                                                    {positionList.map(
+                                                        (item) => (
+                                                            <option
+                                                                value={item}
+                                                                key={item}
+                                                            >
+                                                                {item}
+                                                            </option>
+                                                        )
+                                                    )}
                                                 </select>
                                             </div>
 
@@ -344,23 +377,22 @@ export default function JoinPage() {
                                             </label>
                                             <div className="mt-2 mb-4">
                                                 <select
+                                                    onChange={(e) =>
+                                                        setRank(e.target.value)
+                                                    }
+                                                    value={rank}
                                                     id="rank"
                                                     name="rank"
-                                                    placeholder=""
                                                     className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 >
-                                                    <option value="1">
-                                                        수석
-                                                    </option>
-                                                    <option value="2">
-                                                        책임
-                                                    </option>
-                                                    <option value="3">
-                                                        선임
-                                                    </option>
-                                                    <option value="4">
-                                                        전임
-                                                    </option>
+                                                    {rankList.map((item) => (
+                                                        <option
+                                                            value={item}
+                                                            key={item}
+                                                        >
+                                                            {item}
+                                                        </option>
+                                                    ))}
                                                 </select>
                                             </div>
 
@@ -382,7 +414,7 @@ export default function JoinPage() {
                                         </div>
                                         <button
                                             type="submit"
-                                            className="final-submit flex w-full justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            className="final-submit mt-48 flex w-full justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         >
                                             가입하기
                                         </button>
