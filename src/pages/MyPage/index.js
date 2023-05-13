@@ -49,7 +49,7 @@ export default function MyPage() {
                 <div className="grid grid-cols-6 mx-auto">
                     <Sidebar className="col-span-1" admin={admin}></Sidebar>
                     <div className="col-span-5 h-screen px-20 pt-10 auto-rows-auto">
-                        <div className="container w-5/6 h-4/5 mx-40 rounded border-2 border-slate-200 shadow px-5">
+                        <div className="container w-5/6 h-4/5 mx-40 rounded border-2 border-slate-200 px-5">
                             <div className="text-2xl font-medium pt-10 pb-4 text-start">
                                 개인정보
                             </div>
@@ -163,7 +163,7 @@ export default function MyPage() {
                 <div className="grid grid-cols-6 mx-auto">
                     <Sidebar className="col-span-1" admin={admin}></Sidebar>
                     <div className="col-span-5 h-screen px-20 pt-10 auto-rows-auto">
-                        <div className="container w-5/6 h-4/5 mx-40 rounded border-2 border-slate-200 shadow px-5">
+                        <div className="container w-5/6 h-4/5 mx-40 rounded border-2 border-slate-200 px-5">
                             <div className="text-2xl font-medium pt-10 pb-4 text-start">
                                 개인정보
                             </div>

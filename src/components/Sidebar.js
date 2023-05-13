@@ -32,7 +32,7 @@ export default function Sidebar({ admin }) {
         menus = [
             { name: "직원 관리", path: "/" },
             { name: "프로젝트 관리", path: "/manager" },
-            { name: "프로젝트 생성", path: "/mypage" },
+            { name: "프로젝트 생성", path: `/${admin}/newProject` },
             { name: "평가 관리", path: "/evaluation" },
             { name: "마이페이지", path: `/${admin}/mypage` },
         ];
