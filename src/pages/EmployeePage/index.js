@@ -15,6 +15,8 @@ export default function EmployeePage() {
 
     const role = admin === "manager" ? "경영인" : "직원";
 
+    const cols = ["발주처명", "프로젝트명", "시작일자", "종료일자", "상태"];
+
     // const [subNav, setSubNav] = useState[""];
 
     // const [startDate, setStartDate] = useState(new Date("2021/08/27"));
@@ -32,7 +34,7 @@ export default function EmployeePage() {
 
             <div className="grid grid-cols-6 mx-auto">
                 <Sidebar className="col-span-1" admin={admin}></Sidebar>
-                <Main subTitle={subTitle}></Main>
+                <Main subTitle={subTitle} cols={cols}></Main>
             </div>
         </div>
     );

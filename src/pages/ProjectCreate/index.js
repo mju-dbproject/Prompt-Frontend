@@ -2,10 +2,25 @@ import React, { useState } from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
+import EmployeeModal from "../../components/EmployeeModal";
+
 export default function ProjectCreatePage() {
     const admin = "manager";
 
     const role = admin === "manager" ? "경영인" : "직원";
+
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const [name, setName] = useState("");
+    const [projectNo, setProjectNo] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [client, setClient] = useState("");
+    const [budget, setBudget] = useState("");
+
+    const handleClick = () => {
+        setModalOpen(true);
+    };
 
     return (
         <div>
@@ -30,6 +45,9 @@ export default function ProjectCreatePage() {
                                         id="name"
                                         autocomplete="given-name"
                                         className="w-3/5 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                        onChange={(e) =>
+                                            setName(e.target.value)
+                                        }
                                     ></input>{" "}
                                 </div>
 
@@ -43,6 +61,9 @@ export default function ProjectCreatePage() {
                                         id="phone-number"
                                         autocomplete="given-phone-number"
                                         className="w-3/5 pl-1 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                        onChange={(e) =>
+                                            setProjectNo(e.target.value)
+                                        }
                                     ></input>{" "}
                                 </div>
                             </div>
@@ -57,6 +78,9 @@ export default function ProjectCreatePage() {
                                         id="email"
                                         autocomplete="given-email"
                                         className="w-5/6 rounded-md ml-3 border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                        onChange={(e) =>
+                                            setClient(e.target.value)
+                                        }
                                     ></input>{" "}
                                 </div>
                             </div>
@@ -71,6 +95,9 @@ export default function ProjectCreatePage() {
                                         id="name"
                                         autocomplete="given-name"
                                         className="w-3/5 ml-3 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                        onChange={(e) =>
+                                            setStartDate(e.target.value)
+                                        }
                                     ></input>{" "}
                                 </div>
 
@@ -84,6 +111,9 @@ export default function ProjectCreatePage() {
                                         id="name"
                                         autocomplete="given-name"
                                         className="w-3/5 rounded-md ml-2.5 border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                        onChange={(e) =>
+                                            setEndDate(e.target.value)
+                                        }
                                     ></input>{" "}
                                 </div>
                             </div>
@@ -98,6 +128,9 @@ export default function ProjectCreatePage() {
                                         id="skill"
                                         autocomplete="given-skill"
                                         className="w-5/6 ml-4 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                        onChange={(e) =>
+                                            setBudget(e.target.value)
+                                        }
                                     ></input>{" "}
                                 </div>
                             </div>
@@ -106,7 +139,10 @@ export default function ProjectCreatePage() {
                                     <label className="text-md font-medium leading-6 text-gray-900 mr-16">
                                         프로젝트 투입직원
                                     </label>
-                                    <button className="button rounded-md border border-zinc-300 p-2 pr-2 mr-3">
+                                    <button
+                                        className="button rounded-md border border-zinc-300 p-2 pr-2 mr-3"
+                                        onClick={handleClick}
+                                    >
                                         직원 투입
                                     </button>
                                 </div>
@@ -126,6 +162,8 @@ export default function ProjectCreatePage() {
                     </div>
                 </div>
             </div>
+
+            {modalOpen && <EmployeeModal setModalOpen={setModalOpen} />}
         </div>
     );
 }

@@ -1,17 +1,15 @@
 import React from "react";
 
-export default function Table() {
+export default function Table({ cols }) {
     return (
         <div>
             <section className="w-6/7 border-2 border-slate-200 h-1/2 rounded p-3 mt-3">
                 <table className="table-fixed w-full max-h-screen">
                     <thead className="border-b-2 border-blue-300">
                         <tr>
-                            <th>발주처명</th>
-                            <th>프로젝트명</th>
-                            <th>시작일자</th>
-                            <th>종료일자</th>
-                            <th>상태</th>
+                            {cols.map((cols, index) => (
+                                <th key={index}>{cols}</th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody>
