@@ -117,7 +117,7 @@ export default function ProjectCreatePage() {
                                     ></input>{" "}
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 gap-2 pt-3 px-0">
+                            <div className="grid grid-cols-1 gap-2 pt-3 px-0 mb-2">
                                 <div className="px-2 py-2">
                                     <label className="text-md font-medium leading-6 text-gray-900 mr-16">
                                         예산
@@ -140,7 +140,7 @@ export default function ProjectCreatePage() {
                                         프로젝트 투입직원
                                     </label>
                                     <button
-                                        className="button rounded-md border border-zinc-300 p-2 pr-2 mr-3"
+                                        className="button rounded-md border border-zinc-300 p-2 pr-2"
                                         onClick={handleClick}
                                     >
                                         직원 투입
