@@ -3,6 +3,7 @@ import Search from "./Search";
 import SubNav from "./SubNav";
 import Table from "./Table";
 import DatePick from "./DatePick";
+import "./Search.css";
 
 export default function Main({ subTitle, cols }) {
     const [selectedDate, setSelectedDate] = useState(null);
@@ -20,7 +21,7 @@ export default function Main({ subTitle, cols }) {
             <SubNav subTitle={subTitle}></SubNav>
             <section className="flex items-center place-content-between h-16 mt-3 px-5 border-2 border-slate-200 rounded">
                 <DatePick onChange={handleDateChange} />
-                <Search onChange={handleSearch} />
+                <Search onChange={handleSearch} cols={cols} />
             </section>
             <Table cols={cols}></Table>
         </div>

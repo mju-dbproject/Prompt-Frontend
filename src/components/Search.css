@@ -1,3 +1,25 @@
+.search {
+    width: 50%;
+    justify-self: stretch;
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .lg\:hidden {
+        display: none;
+    }
+}
+
+@media (min-width: 1280px) {
+    .xl\:inline-block {
+        display: inline-block;
+    }
+    .xl\:max-w-xl {
+        max-width: 36rem;
+    }
+}
+
 @media (max-width: 1420px) {
     .search-icon {
         display: none;
@@ -15,13 +37,15 @@
     }
 }
 @media (max-width: 1020px) {
-    .search input {
-        display: none;
-    }
-
     @media (max-width: 705px) {
         .period {
             display: none;
         }
+    }
+}
+
+@media (max-width: 1230px) {
+    .search input {
+        display: none;
     }
 }

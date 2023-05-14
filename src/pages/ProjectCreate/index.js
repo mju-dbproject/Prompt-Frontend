@@ -11,6 +11,8 @@ export default function ProjectCreatePage() {
 
     const [modalOpen, setModalOpen] = useState(false);
 
+    const cols = ["발주처명", "프로젝트명", "시작일자", "종료일자", "상태"];
+
     const [name, setName] = useState("");
     const [projectNo, setProjectNo] = useState("");
     const [startDate, setStartDate] = useState("");
@@ -163,7 +165,9 @@ export default function ProjectCreatePage() {
                 </div>
             </div>
 
-            {modalOpen && <EmployeeModal setModalOpen={setModalOpen} />}
+            {modalOpen && (
+                <EmployeeModal setModalOpen={setModalOpen} cols={cols} />
+            )}
         </div>
     );
 }

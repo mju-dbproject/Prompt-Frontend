@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import "./EmployeeModal.css";
+import Search from "../Search";
 
-export default function EmployeeModal({ setModalOpen }) {
+export default function EmployeeModal({ setModalOpen, cols }) {
     const ref = useRef();
     useOnClickOutside(ref, () => {
         setModalOpen(false);
@@ -20,8 +21,9 @@ export default function EmployeeModal({ setModalOpen }) {
                     <div className="text-xl font-medium pt-7 pl-7 pb-4 text-start">
                         직원 검색
                     </div>
-
-                    <div className="modal__content">웃어요</div>
+                    <div className="mt-20 w-100">
+                        <Search cols={cols} />
+                    </div>
                 </div>
             </div>
         </div>
