@@ -3,12 +3,15 @@ import Stepper from "bs-stepper";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bs-stepper/dist/css/bs-stepper.min.css";
 
-import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
 import "./join.css";
-import axios from "axios";
-import posts from "../../api/posts";
+import Input from "../../components/Input";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PwdIcon from "../../components/PwIcon";
 
 export default function JoinPage() {
     const [pwType, setPwType] = useState({
@@ -16,16 +19,6 @@ export default function JoinPage() {
         visible: false,
         icon: faEye,
     });
-
-    const handlePasswordType = (e) => {
-        setPwType(() => {
-            if (!pwType.visible) {
-                return { type: "text", visible: true, icon: faEyeSlash };
-            } else {
-                return { type: "password", visible: false, icon: faEye };
-            }
-        });
-    };
 
     const stepperRef = useRef(null);
 
@@ -53,11 +46,11 @@ export default function JoinPage() {
     const [rank, setRank] = useState("");
     const [skill, setSkill] = useState("");
 
-    const userInfo1 = {
-        userid: userId,
-        password: password,
-        repassword: repassword,
-    };
+    // const userInfo1 = {
+    //     userid: userId,
+    //     password: password,
+    //     repassword: repassword,
+    // };
 
     useEffect(() => {
         stepperRef.current = new Stepper(document.querySelector("#stepper1"), {
@@ -66,20 +59,20 @@ export default function JoinPage() {
         });
     }, []);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
 
-        const res = await axios
-            .post(posts.fetchJoin, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                data: userInfo1,
-            })
-            .then(console.log);
+    //     // const res = await axios
+    //     //     .post(posts.fetchJoin, {
+    //     //         headers: {
+    //     //             "Content-Type": "application/json",
+    //     //         },
+    //     //         data: userInfo1,
+    //     //     })
+    //     //     .then(console.log);
 
-        stepperRef.current.next();
-    };
+    //     stepperRef.current.next();
+    // };
 
     return (
         <div>
@@ -129,12 +122,9 @@ export default function JoinPage() {
                                             아이디를 입력하세요
                                         </label>
                                         <div className="mt-2.5 mb-7">
-                                            <input
+                                            <Input
+                                                label={userId}
                                                 type="text"
-                                                name="id"
-                                                id="id"
-                                                autocomplete="given-id"
-                                                className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 onChange={(e) =>
                                                     setUserId(e.target.value)
                                                 }
@@ -148,20 +138,16 @@ export default function JoinPage() {
                                             비밀번호를 입력하세요
                                         </label>
                                         <div className="mt-2.5 mb-7 relative">
-                                            <input
+                                            <Input
+                                                label={password}
                                                 type={pwType.type}
-                                                name="password"
-                                                id="password"
-                                                autocomplete="given-password"
-                                                className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 onChange={(e) =>
                                                     setPassword(e.target.value)
                                                 }
                                             />
-                                            <FontAwesomeIcon
-                                                icon={pwType.icon}
-                                                className="absolute top-4 right-3 mb-1.5 text-gray-500"
-                                                onClick={handlePasswordType}
+                                            <PwdIcon
+                                                pwType={pwType}
+                                                setPwType={setPwType}
                                             />
                                         </div>
 
@@ -172,22 +158,18 @@ export default function JoinPage() {
                                             비밀번호를 재입력하세요
                                         </label>
                                         <div className="mt-2.5 relative">
-                                            <input
+                                            <Input
+                                                label={repassword}
                                                 type={pwType.type}
-                                                name="repassword"
-                                                id="repassword"
-                                                autocomplete="given-password"
-                                                className="block w-full rounded-md border border-zinc-300 px py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 onChange={(e) =>
                                                     setRepassword(
                                                         e.target.value
                                                     )
                                                 }
                                             />
-                                            <FontAwesomeIcon
-                                                icon={pwType.icon}
-                                                className="absolute top-4 right-3 mb-1.5 text-gray-500"
-                                                onClick={handlePasswordType}
+                                            <PwdIcon
+                                                pwType={pwType}
+                                                setPwType={setPwType}
                                             />
                                         </div>
                                     </div>
@@ -195,7 +177,10 @@ export default function JoinPage() {
                                     <button
                                         type="submit"
                                         className="flex w-full mt-44 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        onClick={handleSubmit}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            stepperRef.current.next();
+                                        }}
                                     >
                                         다음
                                     </button>
@@ -209,15 +194,12 @@ export default function JoinPage() {
                                             이름을 입력하세요
                                         </label>
                                         <div className="mt-2 mb-4">
-                                            <input
-                                                type="name"
-                                                name="name"
-                                                id="name"
-                                                autocomplete="given-name"
-                                                className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                onChange={(e) => {
-                                                    setName(e.target.value);
-                                                }}
+                                            <Input
+                                                label={name}
+                                                type="text"
+                                                onChange={(e) =>
+                                                    setName(e.target.value)
+                                                }
                                             />
                                         </div>
 
@@ -228,13 +210,10 @@ export default function JoinPage() {
                                             주민등록번호를 입력하세요 (-제외)
                                         </label>
                                         <div className="mt-2 mb-4">
-                                            <input
+                                            <Input
+                                                label={registrationNumber}
                                                 type="password"
-                                                name="registration-number"
-                                                id="registration-number"
-                                                autocomplete="given-registration-number"
-                                                className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                onClick={(e) =>
+                                                onChange={(e) =>
                                                     setRegisterationNumber(
                                                         e.target.value
                                                     )
@@ -249,13 +228,10 @@ export default function JoinPage() {
                                             이메일을 입력하세요
                                         </label>
                                         <div className="mt-2 mb-4">
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                id="email"
-                                                autocomplete="given-email"
-                                                className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                onClick={(e) =>
+                                            <Input
+                                                label={email}
+                                                type="text"
+                                                onChange={(e) =>
                                                     setEmail(e.target.value)
                                                 }
                                             />
@@ -267,13 +243,10 @@ export default function JoinPage() {
                                             전화번호를 입력하세요 (-제외)
                                         </label>
                                         <div className="mt-2 mb-4">
-                                            <input
+                                            <Input
+                                                label={phoneNumber}
                                                 type="text"
-                                                name="phone-number"
-                                                id="phone-number"
-                                                autocomplete="given-phone-number"
-                                                className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                onClick={(e) =>
+                                                onChange={(e) =>
                                                     setPhoneNumber(
                                                         e.target.value
                                                     )
@@ -284,35 +257,26 @@ export default function JoinPage() {
                                             for="education"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
-                                            최종학력을 선택하세요
+                                            최종학력을 입력하세요 (예,
+                                            명지대학교 학사 졸업)
                                         </label>
                                         <div className="mt-2 mb-4">
-                                            <select
+                                            <Input
+                                                label={education}
+                                                type="text"
                                                 onChange={(e) =>
                                                     setEducation(e.target.value)
                                                 }
-                                                value={education}
-                                                id="education"
-                                                name="education"
-                                                className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                            >
-                                                {educationList.map((item) => (
-                                                    <option
-                                                        value={item}
-                                                        key={item}
-                                                    >
-                                                        {item}
-                                                    </option>
-                                                ))}
-                                            </select>
+                                            />
                                         </div>
                                     </div>
                                     <button
                                         type="submit"
                                         className="flex w-full mt-7 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        onClick={() =>
-                                            stepperRef.current.next()
-                                        }
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            stepperRef.current.next();
+                                        }}
                                     >
                                         다음
                                     </button>
@@ -326,12 +290,9 @@ export default function JoinPage() {
                                             경력년수를 입력하세요
                                         </label>
                                         <div className="mt-2 mb-4">
-                                            <input
+                                            <Input
+                                                label={experienceYear}
                                                 type="text"
-                                                name="experience-year"
-                                                id="experience-year"
-                                                autocomplete="given-experience-year"
-                                                className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 onChange={(e) =>
                                                     setExperienceYear(
                                                         e.target.value
@@ -398,15 +359,13 @@ export default function JoinPage() {
                                             for="skill"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
-                                            스킬을 입력하세요
+                                            스킬을 입력하세요 (예, java,
+                                            python..)
                                         </label>
                                         <div className="mt-2 mb-4">
-                                            <input
+                                            <Input
+                                                label={skill}
                                                 type="text"
-                                                name="skill"
-                                                id="skill"
-                                                autocomplete="given-id"
-                                                className="block w-full rounded-md border border-zinc-300 px py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 onChange={(e) =>
                                                     setSkill(e.target.value)
                                                 }
@@ -416,6 +375,9 @@ export default function JoinPage() {
                                     <button
                                         type="submit"
                                         className="final-submit mt-48 flex w-full justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                        }}
                                     >
                                         가입하기
                                     </button>
