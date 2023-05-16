@@ -11,7 +11,7 @@ import ProjectCreatePage from "./pages/ProjectCreate";
 
 const App = () => {
     return (
-        <div>
+        <div className="App">
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/login" element={<LoginPage />} />
