@@ -8,6 +8,7 @@ import JoinPage from "./pages/JoinPage";
 import MyPage from "./pages/MyPage";
 import ManagerPage from "./pages/ManagerPage";
 import ProjectCreatePage from "./pages/ProjectCreate";
+import EvaluationPage from "./pages/EvaluationPage";
 
 const App = () => {
     return (
@@ -18,8 +19,16 @@ const App = () => {
                 <Route path="/join" element={<JoinPage />} />
                 <Route path="/employee" element={<EmployeePage />} />
                 <Route path="/employee/mypage" element={<MyPage />} />
+                <Route
+                    path="/employee/evaluation"
+                    element={<EvaluationPage />}
+                />
                 <Route path="/manager" element={<ManagerPage />} />
                 <Route path="/manager/mypage" element={<MyPage />} />
+                <Route
+                    path="/manager/evaluation"
+                    element={<EvaluationPage />}
+                />
                 <Route
                     path="/manager/newProject"
                     element={<ProjectCreatePage />}
