@@ -14,7 +14,7 @@ export default function Sidebar({ admin }) {
     const navigate = useNavigate();
     let menus = [
         { name: "프로젝트 조회", path: "/employee" },
-        { name: "평가", path: "/evaluation" },
+        { name: "평가", path: `/${admin}/evaluation` },
         { name: "마이페이지", path: `/${admin}/mypage` },
     ];
 
@@ -33,7 +33,7 @@ export default function Sidebar({ admin }) {
             { name: "직원 관리", path: "/" },
             { name: "프로젝트 관리", path: "/manager" },
             { name: "프로젝트 생성", path: `/${admin}/newProject` },
-            { name: "평가 관리", path: "/evaluation" },
+            { name: "평가 관리", path: `/${admin}/evaluation` },
             { name: "마이페이지", path: `/${admin}/mypage` },
         ];
 
@@ -47,7 +47,7 @@ export default function Sidebar({ admin }) {
     }
 
     return (
-        <div className="border-r-2 border-gray-300 h-screen">
+        <div className="border-r border-gray-300 bg-main-color h-screen">
             {menus.map((name, index) => (
                 <div key={index} className="mb-3 pt-10 px-8">
                     <button
@@ -57,10 +57,12 @@ export default function Sidebar({ admin }) {
                     >
                         <FontAwesomeIcon
                             icon={icons[index].name}
-                            size="2xl"
-                            style={{ color: "#292929" }}
+                            size="xl"
+                            style={{ color: "#fff" }}
                         />
-                        <span className="ml-5">{menus[index].name}</span>
+                        <span className="ml-5 text-white font-semibold	">
+                            {menus[index].name}
+                        </span>
                     </button>
                 </div>
             ))}

@@ -10,7 +10,6 @@ import "bs-stepper/dist/css/bs-stepper.min.css";
 import "./join.css";
 import Input from "../../components/Input";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PwdIcon from "../../components/PwIcon";
 
 export default function JoinPage() {
@@ -176,7 +175,7 @@ export default function JoinPage() {
 
                                     <button
                                         type="submit"
-                                        className="flex w-full mt-44 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="flex w-full mt-44 justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         onClick={(e) => {
                                             e.preventDefault();
                                             stepperRef.current.next();
@@ -272,7 +271,7 @@ export default function JoinPage() {
                                     </div>
                                     <button
                                         type="submit"
-                                        className="flex w-full mt-7 justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="flex w-full mt-7 justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         onClick={(e) => {
                                             e.preventDefault();
                                             stepperRef.current.next();
@@ -374,7 +373,7 @@ export default function JoinPage() {
                                     </div>
                                     <button
                                         type="submit"
-                                        className="final-submit mt-48 flex w-full justify-center rounded-md bg-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="final-submit mt-48 flex w-full justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         onClick={(e) => {
                                             e.preventDefault();
                                         }}

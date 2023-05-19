@@ -153,7 +153,7 @@ export default function ProjectCreatePage() {
                         <div className="mx-10 mt-16 flex justify-end">
                             <button
                                 type="submit"
-                                className="flex w-1/5 justify-center rounded-md bg-blue-400 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="flex w-1/5 justify-center rounded-md bg-sub-color px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 onClick={() =>
                                     alert("프로젝트가 생성되었습니다!")
                                 }

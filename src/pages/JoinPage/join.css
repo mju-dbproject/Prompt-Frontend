@@ -5,3 +5,12 @@
 .final-submit {
     margin-top: 6.4rem;
 }
+
+.bs-stepper .step-trigger:focus {
+    color: #3282b8;
+    outline: none;
+}
+
+.active .bs-stepper-circle {
+    background-color: #3282b8;
+}

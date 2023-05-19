@@ -9,7 +9,7 @@ export default function DatePick() {
     const [endDate, setEndDate] = useState(null);
     return (
         <div className="period mr-44">
-            <div className="flex items-center w-1/2">
+            <div className="flex items-center w-1/2 ">
                 <div className="whitespace-nowrap mr-5 w-10">기간</div>
 
                 <DatePicker
@@ -23,7 +23,7 @@ export default function DatePick() {
                     startDate={startDate}
                     endDate={endDate}
                     locale={ko}
-                    className="rounded text-center w-40 py-1 px-3 border-2 border-blue-400"
+                    className="rounded text-center w-40 py-0.5 px-3.5 border-2 border-sub-color"
                 />
                 <span>&nbsp;~&nbsp;</span>
                 <DatePicker
@@ -35,7 +35,7 @@ export default function DatePick() {
                     startDate={startDate}
                     endDate={endDate}
                     locale={ko}
-                    className="rounded text-center w-40 py-1 px-3 border-2 border-blue-400"
+                    className="rounded text-center w-40 py-0.5 px-3.5 border-2 border-sub-color"
                 />
             </div>
         </div>

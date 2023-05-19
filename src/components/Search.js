@@ -7,6 +7,8 @@ import { useLocation } from "react-router";
 
 import { useDebounce } from "../hooks/useDebounce";
 
+import "./Search.css";
+
 export default function Search({ cols }) {
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
@@ -22,7 +24,7 @@ export default function Search({ cols }) {
         <div className="search">
             <select
                 placeholder="검색조건"
-                className="p-1 rounded border-2 border-blue-400 flex-1/2"
+                className="p-1 rounded border-2 border-sub-color flex-1/2"
             >
                 {cols.map((col, index) => (
                     <option key={index}>{col}</option>
@@ -30,7 +32,7 @@ export default function Search({ cols }) {
             </select>
 
             <input
-                className="mx-3 p-0.5 rounded border-2 border-blue-400 flex-1"
+                className="mx-3 p-0.5 rounded border-2 border-sub-color flex-1"
                 type="text"
             ></input>
             <FontAwesomeIcon className="search-icon" icon={faMagnifyingGlass} />
