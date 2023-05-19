@@ -71,8 +71,8 @@ export default function ProjectCreatePage() {
                             </div>
                             <div className="grid grid-cols-1 gap-2 pt-2 px-0">
                                 <div className="px-2 py-3">
-                                    <label className="text-md font-medium leading-6 text-gray-900 mr-10">
-                                        발주처명
+                                    <label className="text-md font-medium leading-6 text-gray-900 mr-2.5">
+                                        프로젝트 설명
                                     </label>
                                     <input
                                         type="text"
@@ -86,10 +86,27 @@ export default function ProjectCreatePage() {
                                     ></input>{" "}
                                 </div>
                             </div>
+                            <div className="grid grid-cols-1 gap-2 pt-2 px-0">
+                                <div className="px-2 py-3">
+                                    <label className="text-md font-medium leading-6 text-gray-900 mr-10">
+                                        발주처명
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        id="email"
+                                        autocomplete="given-email"
+                                        className="w-5/6 rounded-md ml-3.5 border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                        onChange={(e) =>
+                                            setClient(e.target.value)
+                                        }
+                                    ></input>{" "}
+                                </div>
+                            </div>
 
                             <div className="grid grid-cols-1 gap-2 pt-3 px-0 mb-2">
                                 <div className="px-2 py-2">
-                                    <label className="text-md font-medium leading-6 text-gray-900 mr-16">
+                                    <label className="text-md font-medium leading-6 text-gray-900 mr-20">
                                         예산
                                     </label>
                                     <input
@@ -97,7 +114,7 @@ export default function ProjectCreatePage() {
                                         name="skill"
                                         id="skill"
                                         autocomplete="given-skill"
-                                        className="w-5/6 ml-4 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                        className="w-5/6 ml-4.5 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
                                         onChange={(e) =>
                                             setBudget(e.target.value)
                                         }
