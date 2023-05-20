@@ -4,7 +4,7 @@ import SubNav from "./SubNav";
 import Table from "./Table";
 import DatePick from "./DatePick";
 
-export default function Main({ subTitle, cols }) {
+export default function Main({ subTitle, cols, isAdmin }) {
     const [selectedDate, setSelectedDate] = useState(null);
 
     const handleDateChange = (date) => {
@@ -23,7 +23,7 @@ export default function Main({ subTitle, cols }) {
                 <Search onChange={handleSearch} cols={cols} />
             </section>
             <div className="relative z-0">
-                <Table cols={cols}></Table>
+                <Table cols={cols} isAdmin={isAdmin}></Table>
             </div>
         </div>
     );

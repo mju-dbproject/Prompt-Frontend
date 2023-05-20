@@ -5,10 +5,6 @@ import RadioInput from "../../components/RadioInput";
 import Sidebar from "../../components/Sidebar";
 
 export default function EvaluationPage() {
-    const [admin, setAdmin] = useState("");
-
-    const role = admin === "manager" ? "경영인" : "직원";
-
     const pjs = ["신한은행 앱 제작", "공공플랫폼 운영", "복지재단 앱 제작"];
     const evals = ["동료평가", "PM 평가", "발주처평가"];
     const employeeInfo = [
@@ -36,12 +32,20 @@ export default function EvaluationPage() {
     const [emplyee, setEmployee] = useState("");
     const [isSelect, setSelect] = useState(false);
 
+    const [isAdmin, setIsAdmin] = useState(null);
+
+    const role = isAdmin ? "경영인" : "직원";
+
     return (
         <div>
             <Header role={role}></Header>
 
             <div className="grid grid-cols-6 mx-auto">
-                <Sidebar className="col-span-1" admin={admin}></Sidebar>
+                <Sidebar
+                    className="col-span-1"
+                    isAdmin={isAdmin}
+                    setIsAdmin={setIsAdmin}
+                ></Sidebar>
                 <div className="bg-gray-100 col-span-5 h-screen px-20 pt-10 auto-rows-auto">
                     <div className="bg-white drop-shadow-md container w-5/6 h-5/6 mx-40 rounded border border-gray-300 px-5 mb-20">
                         <div className="flex justify-between pt-10 pb-3">

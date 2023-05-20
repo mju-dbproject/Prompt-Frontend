@@ -5,9 +5,9 @@ import Sidebar from "../../components/Sidebar";
 import EmployeeModal from "../../components/EmployeeModal";
 
 export default function ProjectCreatePage() {
-    const admin = "manager";
+    const [isAdmin, setIsAdmin] = useState(null);
 
-    const role = admin === "manager" ? "경영인" : "직원";
+    const role = isAdmin ? "경영인" : "직원";
 
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -29,7 +29,11 @@ export default function ProjectCreatePage() {
             <Header role={role}></Header>
 
             <div className="grid grid-cols-6 mx-auto">
-                <Sidebar className="col-span-1" admin={admin}></Sidebar>
+                <Sidebar
+                    className="col-span-1"
+                    isAdmin={isAdmin}
+                    setIsAdmin={setIsAdmin}
+                ></Sidebar>
                 <div className="bg-gray-100 col-span-5 h-screen px-20 pt-10 auto-rows-auto">
                     <div className="bg-white drop-shadow-md container w-5/6 h-5/6 mx-40 rounded border-2 border-slate-200 px-5 mb-20">
                         <div className="text-2xl font-medium pt-10 pb-4 text-start">
@@ -127,7 +131,7 @@ export default function ProjectCreatePage() {
                                         프로젝트 투입직원
                                     </label>
                                     <button
-                                        className="button rounded-md border border-zinc-300 p-2 pr-2"
+                                        className="button rounded-md border border-gray-300 p-2 pr-2"
                                         onClick={handleClick}
                                     >
                                         직원 투입

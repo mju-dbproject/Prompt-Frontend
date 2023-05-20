@@ -7,15 +7,14 @@ import requests from "../../api/requests";
 
 export default function MyPage() {
     const location = useLocation();
-
-    const [admin, setAdmin] = useState("");
-
-    const role = admin === "manager" ? "경영인" : "직원";
-
     useEffect(() => {
-        const path = location.pathname.split("/");
-        setAdmin(path[1]);
-    }, [location]);
+        const admin = location.pathname.startsWith("/manager");
+        console.log(admin + "ddd");
+    });
+
+    const [isAdmin, setIsAdmin] = useState(null);
+
+    const role = isAdmin ? "경영인" : "직원";
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -47,9 +46,13 @@ export default function MyPage() {
                 <Header role={role}></Header>
 
                 <div className="grid grid-cols-6 mx-auto">
-                    <Sidebar className="col-span-1" admin={admin}></Sidebar>
-                    <div className="col-span-5 h-screen px-20 pt-10 auto-rows-auto">
-                        <div className="container w-5/6 h-4/5 mx-40 rounded border-2 border-slate-200 px-5">
+                    <Sidebar
+                        className="col-span-1"
+                        isAdmin={isAdmin}
+                        setIsAdmin={setIsAdmin}
+                    ></Sidebar>
+                    <div className="bg-gray-100 col-span-5 h-screen px-20 pt-10 auto-rows-auto drop-shadow-md">
+                        <div className="bg-white drop-shadow-md container w-5/6 h-4/5 mx-40 rounded border border-gray-300 px-5">
                             <div className="text-2xl font-medium pt-10 pb-4 text-start">
                                 개인정보
                             </div>
@@ -64,7 +67,7 @@ export default function MyPage() {
                                             name="name"
                                             id="name"
                                             autocomplete="given-name"
-                                            className="w-3/5 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                            className="w-3/5 rounded-md border-0.5 border-gray-300  py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
                                             onChange={(e) =>
                                                 setName(e.target.value)
                                             }
@@ -80,7 +83,7 @@ export default function MyPage() {
                                             name="phone-number"
                                             id="phone-number"
                                             autocomplete="given-phone-number"
-                                            className="w-3/5 pl-1 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                            className="w-3/5 pl-1 rounded-md border-0.5 border-gray-300  py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
                                             onChange={(e) => {
                                                 setPhoneNumber(e.target.value);
                                             }}
@@ -97,7 +100,7 @@ export default function MyPage() {
                                             name="email"
                                             id="email"
                                             autocomplete="given-email"
-                                            className="w-5/6 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                            className="w-5/6 rounded-md border-0.5 border-gray-300  py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
                                             onChange={(e) => {
                                                 setEmail(e.target.value);
                                             }}
@@ -133,7 +136,7 @@ export default function MyPage() {
                                             name="skill"
                                             id="skill"
                                             autocomplete="given-skill"
-                                            className="w-5/6 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
+                                            className="w-5/6 rounded-md border-0.5 border-gray-300  py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
                                             onChange={(e) =>
                                                 setSkill(e.target.value)
                                             }
@@ -161,9 +164,13 @@ export default function MyPage() {
                 <Header role={role}></Header>
 
                 <div className="grid grid-cols-6 mx-auto">
-                    <Sidebar className="col-span-1" admin={admin}></Sidebar>
-                    <div className="col-span-5 h-screen px-20 pt-10 auto-rows-auto">
-                        <div className="container w-5/6 h-4/5 mx-40 rounded border-2 border-slate-200 px-5">
+                    <Sidebar
+                        className="col-span-1"
+                        isAdmin={isAdmin}
+                        setIsAdmin={setIsAdmin}
+                    ></Sidebar>
+                    <div className="bg-gray-100 col-span-5 h-screen px-20 pt-10 auto-rows-auto ">
+                        <div className="bg-white drop-shadow-md container w-5/6 h-4/5 mx-40 rounded border border-gray-300 px-5">
                             <div className="text-2xl font-medium pt-10 pb-4 text-start">
                                 개인정보
                             </div>
