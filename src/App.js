@@ -13,6 +13,7 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 
 import ProjectManage from "./pages/ProjectManage";
 import EmployeeManage from "./pages/EmployeeManage";
+import NotApprovePage from "./pages/NotApprovePage";
 
 const App = () => {
     return (
@@ -22,6 +23,7 @@ const App = () => {
                 <Route path="/" element={<MainPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/join" element={<JoinPage />} />
+                <Route path="/notApprove" element={<NotApprovePage />} />
 
                 {/* employee */}
 

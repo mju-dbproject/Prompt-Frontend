@@ -8,6 +8,8 @@ import PwdIcon from "../../components/PwIcon";
 export default function LoginPage() {
     const navigate = useNavigate();
 
+    const [isAdmin, setIsAdmin] = useState(true);
+
     const [pwType, setPwType] = useState({
         type: "password",
         visible: false,
@@ -31,7 +33,7 @@ export default function LoginPage() {
         })
             .then(() => console.log("success"))
             .then((res) => console.log(res))
-            .then(navigate("/manager"));
+            .then(navigate("/notApprove"));
     };
 
     return (
