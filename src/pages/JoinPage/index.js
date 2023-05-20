@@ -3,14 +3,11 @@ import Stepper from "bs-stepper";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bs-stepper/dist/css/bs-stepper.min.css";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-// import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-
 import "./join.css";
 import Input from "../../components/Input";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import PwdIcon from "../../components/PwIcon";
+import { useNavigate } from "react-router";
 
 export default function JoinPage() {
     const [pwType, setPwType] = useState({
@@ -20,6 +17,8 @@ export default function JoinPage() {
     });
 
     const stepperRef = useRef(null);
+
+    const navigate = useNavigate();
 
     const educationList = ["고등학교", "대학교", "석사", "박사"];
     const positionList = [
@@ -376,6 +375,7 @@ export default function JoinPage() {
                                         className="final-submit mt-48 flex w-full justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         onClick={(e) => {
                                             e.preventDefault();
+                                            navigate("/login");
                                         }}
                                     >
                                         가입하기
