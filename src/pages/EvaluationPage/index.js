@@ -25,6 +25,11 @@ export default function EvaluationPage() {
         "프로젝트를 진행했던 참여사 직원들과의 소통은 원활하셨나요?",
         "발주한 프로젝트에 대한 전체적인 평가를 해주세요.",
     ];
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert("저장되었습니다!");
+    };
     // 발주처 평가는 해당 프로젝트의 pm인지 확인 후  .. 일단은 임시
 
     const [pj, setPj] = useState("");
@@ -38,7 +43,7 @@ export default function EvaluationPage() {
 
     return (
         <div>
-            <Header role={role}></Header>
+            <Header role={role} isAdmin={isAdmin}></Header>
 
             <div className="grid grid-cols-6 mx-auto">
                 <Sidebar
@@ -55,6 +60,7 @@ export default function EvaluationPage() {
                             <button
                                 type="submit"
                                 className="w-30 h-10 rounded-md bg-sub-color px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                onClick={handleSubmit}
                             >
                                 저장하기
                             </button>

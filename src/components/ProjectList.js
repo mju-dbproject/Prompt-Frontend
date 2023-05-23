@@ -16,7 +16,7 @@ export default function ProjectList({ role, isAdmin, setIsAdmin }) {
     }
     return (
         <div>
-            <Header role={role}></Header>
+            <Header role={role} isAdmin={isAdmin}></Header>
 
             <div className="grid grid-cols-6 mx-auto">
                 <Sidebar

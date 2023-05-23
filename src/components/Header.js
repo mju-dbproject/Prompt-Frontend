@@ -1,7 +1,8 @@
 import React from "react";
 import Button from "./Button";
 
-export default function Header({ role }) {
+export default function Header({ role, isAdmin }) {
+    const home = isAdmin ? "manager" : "employee";
     return (
         <header className="grid grid-cols-6 w-full border-b border-gray-300 ">
             <div className="col-span-1 border-r border-gray-300 bg-main-color"></div>
@@ -10,7 +11,7 @@ export default function Header({ role }) {
                 aria-label="Global"
             >
                 <a
-                    href="/employee"
+                    href={`/${home}`}
                     className="text-xl text-black font-semibold leading-5 no-underline"
                 >
                     (주) 프람트 솔루션

@@ -31,7 +31,7 @@ export default function ProjectCreatePage() {
 
     return (
         <div>
-            <Header role={role}></Header>
+            <Header role={role} isAdmin={isAdmin}></Header>
 
             <div className="grid grid-cols-6 mx-auto">
                 <Sidebar
@@ -56,8 +56,6 @@ export default function ProjectCreatePage() {
                                     ) {
                                         alert("생성되었습니다!");
                                         navigate("/manager");
-                                    } else {
-                                        alert("취소합니다.");
                                     }
                                 }}
                             >
