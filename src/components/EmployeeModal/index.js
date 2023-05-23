@@ -1,18 +1,26 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import "./EmployeeModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Table from "../Table";
 import ModalTable from "../ModalTable";
 
-export default function EmployeeModal({ setModalOpen }) {
+export default function EmployeeModal({ setModalOpen, onEmployeeSelect }) {
+    const [selectedEmployee, setSelectedEmployee] = useState([]);
     const ref = useRef();
     useOnClickOutside(ref, () => {
         setModalOpen(false);
     });
 
-    const cols = ["사번", "이름", "스킬", "직급", "포지션", "권한"];
+    const handleSelectedEmployee = (employee) => {
+        setSelectedEmployee((prev) => [...prev, employee]);
+        console.log(selectedEmployee);
+        onEmployeeSelect(selectedEmployee);
+    };
+
+    const tasks = ["사번", "이름", "스킬", "직급", "포지션"];
+    const [task, setTask] = useState("");
+    const [isAdd, setIsAdd] = useState(false);
 
     return (
         <div className="presentation">
@@ -30,12 +38,18 @@ export default function EmployeeModal({ setModalOpen }) {
                         </div>
                     </div>
 
-                    <div className="flex justify-end mr-14">
-                        <select className="px-2 mt-2 rounded-md border-1.5 border-gray-300 py-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <option>사번</option>
-                            <option>이름</option>
-                            <option>스킬</option>
-                            <option>직급</option>å<option>권한</option>
+                    <div className="flex justify-end mr-10">
+                        <select
+                            className="px-2 mt-2 rounded-md border-1.5 border-gray-300 py-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            onChange={(e) => setTask(e.target.value)}
+                            id="task"
+                            name="task"
+                        >
+                            {tasks.map((item, index) => (
+                                <option value={item} key={index}>
+                                    {item}
+                                </option>
+                            ))}
                         </select>
                         <input
                             type="text"
@@ -47,15 +61,11 @@ export default function EmployeeModal({ setModalOpen }) {
                             <FontAwesomeIcon
                                 className="ml-2 mt-3"
                                 icon={faMagnifyingGlass}
+                                onClick={() => setIsAdd(true)}
                             />
                         </button>
                     </div>
-                    <div className="flex justify-center mx-10 mt-2">
-                        <ModalTable cols={cols} />
-                    </div>
-                    <div className="flex justify-center mx-10 mt-2">
-                        <section className="mt-2 h-40 w-full pl-4 pr-4 border border-gray-300 drop-shadow-sm rounded align-center"></section>
-                    </div>
+                    <ModalTable onEmployeeSelect={handleSelectedEmployee} />
                 </div>
             </div>
         </div>
