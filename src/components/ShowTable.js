@@ -6,7 +6,7 @@ import {
     useSetRecoilState,
     useResetRecoilState,
 } from "recoil";
-import selectedEmployeesState from "../atom";
+import { selectedEmployeesState } from "../hooks/recoil/atoms";
 
 export default function ShowTable() {
     const selectedcols = ["사번", "이름", "스킬", "직급", "포지션", "직무"];
