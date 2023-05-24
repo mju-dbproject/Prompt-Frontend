@@ -4,23 +4,35 @@ import "./EmployeeModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import ModalTable from "../ModalTable";
+import selectedEmployeesState from "../../atom";
+import {
+    useRecoilState,
+    useRecoilValue,
+    useSetRecoilState,
+    useResetRecoilState,
+} from "recoil";
 
-export default function EmployeeModal({ setModalOpen, onEmployeeSelect }) {
-    const [selectedEmployee, setSelectedEmployee] = useState([]);
+export default function EmployeeModal({ setModalOpen }) {
     const ref = useRef();
     useOnClickOutside(ref, () => {
         setModalOpen(false);
     });
 
+    const [selectedEmployees, setSelectedEmployees] = useRecoilState(
+        selectedEmployeesState
+    );
+    const currentSelectedEmployee = useRecoilValue(selectedEmployeesState); //읽기 전용
+    const selectedEmployeeHandler = useSetRecoilState(selectedEmployeesState); // 값만 변경시키기
+    const resetSelectedEmployee = useResetRecoilState(selectedEmployeesState); // 디폴트값으로 값 변경
+
     const handleSelectedEmployee = (employee) => {
-        setSelectedEmployee((prev) => [...prev, employee]);
-        console.log(selectedEmployee);
-        onEmployeeSelect(selectedEmployee);
+        setSelectedEmployees((prev) => [...prev, employee]);
+        console.log(selectedEmployees);
+        // onEmployeeSelect(updatedSelectedEmployee);
     };
 
     const tasks = ["사번", "이름", "스킬", "직급", "포지션"];
     const [task, setTask] = useState("");
-    const [isAdd, setIsAdd] = useState(false);
 
     return (
         <div className="presentation">
@@ -61,7 +73,6 @@ export default function EmployeeModal({ setModalOpen, onEmployeeSelect }) {
                             <FontAwesomeIcon
                                 className="ml-2 mt-3"
                                 icon={faMagnifyingGlass}
-                                onClick={() => setIsAdd(true)}
                             />
                         </button>
                     </div>

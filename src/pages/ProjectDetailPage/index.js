@@ -3,7 +3,15 @@ import ButtonLists from "../../components/ButtonLists";
 import EmployeeModal from "../../components/EmployeeModal";
 import Header from "../../components/Header";
 import Label from "../../components/Label";
+import ShowTable from "../../components/ShowTable";
+
 import Sidebar from "../../components/Sidebar";
+import {
+    useRecoilState,
+    useRecoilValue,
+    useSetRecoilState,
+    useResetRecoilState,
+} from "recoil";
 
 export default function ProjectDetailPage() {
     const [isAdmin, setIsAdmin] = useState(false);
@@ -89,7 +97,7 @@ export default function ProjectDetailPage() {
                                             </button>
                                         )}
                                     </div>
-                                    <div className="px-1.5 py-2 w-full h-28 rounded-md border-0.5 border-gray-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main-color sm:text-sm sm:leading-5"></div>
+                                    <ShowTable />
                                 </div>
                             </div>
 

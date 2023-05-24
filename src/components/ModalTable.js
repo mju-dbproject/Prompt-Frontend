@@ -26,13 +26,14 @@ export default function ModalTable({ onEmployeeSelect }) {
             ...prevSelectedEmployees,
             newEmployee,
         ]);
+        // console.log(selectedEmployee);
         onEmployeeSelect(newEmployee);
     };
 
     return (
         <div>
-            <div className="flex justify-center mx-10 mt-2">
-                <section className="mt-2 h-40 w-full py-3 px-7 border border-gray-300 drop-shadow-sm rounded align-center">
+            <div className="flex block justify-center mx-10 mt-2">
+                <section className="mt-2 h-40 w-full py-3 px-7 border border-gray-300 drop-shadow-sm rounded align-center h-1/2 overflow-y-auto">
                     <table className="table-auto w-full h-full text-sm">
                         <thead>
                             <tr className="border-b-2 border-sub-color">
@@ -151,8 +152,8 @@ export default function ModalTable({ onEmployeeSelect }) {
                     </table>
                 </section>
             </div>
-            <div className="flex justify-center mx-10 mt-2">
-                <section className="mt-2 h-40 w-full py-3 px-7 border border-gray-300 drop-shadow-sm rounded align-center">
+            <div className="flex block justify-center mx-10 mt-2">
+                <section className="mt-2 h-40 w-full py-3 px-7 border border-gray-300 drop-shadow-sm rounded align-center h-1/2 overflow-y-auto">
                     <table className="table-auto w-full h-full text-sm">
                         <thead>
                             <tr className="border-b-2 border-sub-color">
