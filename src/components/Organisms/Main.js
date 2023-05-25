@@ -63,10 +63,13 @@ export default function Main({ subTitle, cols, isAdmin }) {
     return (
         <div className="col-span-5 h-screen px-16 py-10 bg-gray-100 ">
             <SubNav subTitle={subTitle}></SubNav>
-            <section className="relative z-10 flex bg-white drop-shadow-md items-center place-content-between h-16 mt-3 px-5 border border-slate-200 rounded">
-                <DatePick onChange={handleDateChange} />
-                <Search onChange={handleSearch} cols={cols} />
-            </section>
+            {isAdmin && (
+                <section className="relative z-10 flex bg-white drop-shadow-md items-center place-content-between h-16 mt-3 px-5 border border-slate-200 rounded">
+                    <DatePick onChange={handleDateChange} />
+                    <Search onChange={handleSearch} cols={cols} />
+                </section>
+            )}
+
             <div className="relative z-0">
                 <ProjectTable cols={cols} isAdmin={isAdmin}></ProjectTable>
             </div>

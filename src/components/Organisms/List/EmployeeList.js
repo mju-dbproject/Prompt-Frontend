@@ -30,6 +30,7 @@ export default function EmployeeList({ role, isAdmin, setIsAdmin }) {
                     isAdmin={isAdmin}
                     setIsAdmin={setIsAdmin}
                 ></Sidebar>
+
                 <div className="col-span-5 h-screen px-16 py-10 bg-gray-100 ">
                     <SubNav subTitle={subTitle}></SubNav>
                     <section className="flex justify-end bg-white drop-shadow-md items-center place-content-between h-16 mt-3 px-5 border border-slate-200 rounded">
