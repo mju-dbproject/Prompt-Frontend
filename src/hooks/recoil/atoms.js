@@ -19,3 +19,21 @@ export const allEmployeesState = atom({
     key: "allEmployeesState",
     default: [],
 });
+
+export const joinInfoState = atom({
+    key: "joinInfoState",
+    default: {
+        userId: "",
+        password: "",
+        repassword: "",
+        name: "",
+        registrationNumber: "",
+        email: "",
+        phoneNumber: "",
+        education: "",
+        experienceYear: "",
+        position: "",
+        rank: "",
+        skill: "",
+    },
+});
