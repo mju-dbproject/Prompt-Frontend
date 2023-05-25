@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import DetailEvaluation from "../../components/DetailEvaluation";
-import Header from "../../components/Header";
-import RadioInput from "../../components/RadioInput";
-import Sidebar from "../../components/Sidebar";
+import DetailEvaluation from "../../components/Organisms/DetailEvaluation";
+import Header from "../../components/Molecules/Header/Header";
+import RadioInput from "../../components/Atoms/Input/RadioInput";
+import Sidebar from "../../components/Molecules/Sidebar/Sidebar";
 
 export default function EvaluationPage() {
     const pjs = ["신한은행 앱 제작", "공공플랫폼 운영", "복지재단 앱 제작"];

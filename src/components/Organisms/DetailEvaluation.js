@@ -39,7 +39,6 @@ export default function DetailEvaluation({
             <button
                 type="submit"
                 className="w-max ml-2 h-10 rounded-md bg-sub-color px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick
             >
                 확인
             </button>

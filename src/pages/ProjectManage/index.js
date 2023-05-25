@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ProjectList from "../../components/ProjectList";
+import ProjectList from "../../components/Organisms/List/ProjectList";
 
 export default function ProjectManage() {
-    const [isAdmin, setIsAdmin] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(true);
 
     const role = isAdmin ? "경영인" : "직원";
 

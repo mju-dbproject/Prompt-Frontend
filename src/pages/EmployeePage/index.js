@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import Header from "../../components/Header";
-import Sidebar from "../../components/Sidebar";
-import Main from "../../components/Main";
 
 import "react-datepicker/dist/react-datepicker.css";
-import ProjectList from "../../components/ProjectList";
+import ProjectList from "../../components/Organisms/List/ProjectList";
 
 export default function EmployeePage() {
     const [isAdmin, setIsAdmin] = useState(true);

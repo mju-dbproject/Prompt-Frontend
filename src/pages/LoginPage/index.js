@@ -2,8 +2,8 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../../components/Input";
-import PwdIcon from "../../components/PwIcon";
+import Input from "../../components/Atoms/Input/Input";
+import PwdIcon from "../../components/Atoms/Icon/PwIcon";
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -19,21 +19,19 @@ export default function LoginPage() {
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = () => {
-        fetch("http://localhost:3000/user/info", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-
-            body: JSON.stringify({
-                userId: userId,
-                password: password,
-            }),
-        })
-            .then(() => console.log("success"))
-            .then((res) => console.log(res))
-            .then(navigate("/notApprove"));
+    const handleSubmit = async () => {
+        const response = await fetch(
+            "https://2d55b3a9-65f0-40be-9a3b-9348ac5d5303.mock.pstmn.io/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        const res = await response.json();
+        console.log(res);
+        // .then(navigate("/manager"));
     };
 
     return (

@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import Button from "../../Atoms/Button/Button";
 
 export default function Header({ role, isAdmin }) {
     const home = isAdmin ? "manager" : "employee";

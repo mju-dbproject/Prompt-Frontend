@@ -1,7 +1,7 @@
 import React from "react";
 import "./MainPage.css";
 
-import Button from "../../components/Button";
+import Button from "../../components/Atoms/Button/Button";
 
 export default function MainPage() {
     return (

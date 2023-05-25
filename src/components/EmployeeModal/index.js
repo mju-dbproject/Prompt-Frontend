@@ -3,7 +3,7 @@ import useOnClickOutside from "../../hooks/useOnClickOutside";
 import "./EmployeeModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import ModalTable from "../ModalTable";
+import ModalTable from "../Atoms/Table/ModalTable";
 import { selectedEmployeesState } from "../../hooks/recoil/atoms";
 import {
     useRecoilState,

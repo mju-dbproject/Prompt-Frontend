@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 import { useLocation } from "react-router";
 
-import { useDebounce } from "../hooks/useDebounce";
+import { useDebounce } from "../../../hooks/useDebounce";
 
 import "./Search.css";
 
@@ -35,7 +35,12 @@ export default function Search({ cols }) {
                 className="mx-3 p-0.5 rounded border-2 border-sub-color flex-1"
                 type="text"
             ></input>
-            <FontAwesomeIcon className="search-icon" icon={faMagnifyingGlass} />
+            <button>
+                <FontAwesomeIcon
+                    className="search-icon"
+                    icon={faMagnifyingGlass}
+                />
+            </button>
         </div>
     );
 }

@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bs-stepper/dist/css/bs-stepper.min.css";
 
 import "./join.css";
-import Input from "../../components/Input";
+import Input from "../../components/Atoms/Input/Input";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-import PwdIcon from "../../components/PwIcon";
+import PwdIcon from "../../components/Atoms/Icon/PwIcon";
 import { useNavigate } from "react-router";
 
 export default function JoinPage() {
@@ -31,24 +31,20 @@ export default function JoinPage() {
     ];
     const rankList = ["수석", "책임", "선임", "전임"];
 
-    const [userId, setUserId] = useState("");
-    const [password, setPassword] = useState("");
-    const [repassword, setRepassword] = useState("");
-    const [name, setName] = useState("");
-    const [registrationNumber, setRegisterationNumber] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [education, setEducation] = useState("");
-    const [experienceYear, setExperienceYear] = useState("");
-    const [position, setPosition] = useState("");
-    const [rank, setRank] = useState("");
-    const [skill, setSkill] = useState("");
-
-    // const userInfo1 = {
-    //     userid: userId,
-    //     password: password,
-    //     repassword: repassword,
-    // };
+    const [joinInfo, setJoinInfo] = useState({
+        userId: "",
+        password: "",
+        repassword: "",
+        name: "",
+        registrationNumber: "",
+        email: "",
+        phoneNumber: "",
+        education: "",
+        experienceYear: "",
+        position: "",
+        rank: "",
+        skill: "",
+    });
 
     useEffect(() => {
         stepperRef.current = new Stepper(document.querySelector("#stepper1"), {
@@ -57,20 +53,35 @@ export default function JoinPage() {
         });
     }, []);
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
+    const handleIdValidation = async () => {
+        const response = await fetch(
+            "https://2d55b3a9-65f0-40be-9a3b-9348ac5d5303.mock.pstmn.io/employee/check-id",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: joinInfo.userId,
+                }),
+            }
+        );
 
-    //     // const res = await axios
-    //     //     .post(posts.fetchJoin, {
-    //     //         headers: {
-    //     //             "Content-Type": "application/json",
-    //     //         },
-    //     //         data: userInfo1,
-    //     //     })
-    //     //     .then(console.log);
+        if (response.status === 400 || response.status === 500) {
+            console.log("Error occurred..");
+        }
 
-    //     stepperRef.current.next();
-    // };
+        console.log(response);
+        stepperRef.current.next();
+    };
+
+    const handleValueChange = (e) => {
+        setJoinInfo({
+            ...joinInfo,
+            [e.target.label]: e.target.value,
+        });
+        console.log(joinInfo);
+    };
 
     return (
         <div>
@@ -121,10 +132,10 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2.5 mb-7">
                                             <Input
-                                                label={userId}
+                                                label="userId"
                                                 type="text"
                                                 onChange={(e) =>
-                                                    setUserId(e.target.value)
+                                                    handleValueChange(e)
                                                 }
                                             />
                                         </div>
@@ -137,11 +148,8 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2.5 mb-7 relative">
                                             <Input
-                                                label={password}
+                                                label="password"
                                                 type={pwType.type}
-                                                onChange={(e) =>
-                                                    setPassword(e.target.value)
-                                                }
                                             />
                                             <PwdIcon
                                                 pwType={pwType}
@@ -157,13 +165,11 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2.5 relative">
                                             <Input
-                                                label={repassword}
+                                                label="repassword"
                                                 type={pwType.type}
-                                                onChange={(e) =>
-                                                    setRepassword(
-                                                        e.target.value
-                                                    )
-                                                }
+                                                onChange={(e) => {
+                                                    handleValueChange(e);
+                                                }}
                                             />
                                             <PwdIcon
                                                 pwType={pwType}
@@ -175,9 +181,9 @@ export default function JoinPage() {
                                     <button
                                         type="submit"
                                         className="flex w-full mt-44 justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        onClick={(e) => {
+                                        onClick={async (e) => {
                                             e.preventDefault();
-                                            stepperRef.current.next();
+                                            handleIdValidation();
                                         }}
                                     >
                                         다음
@@ -186,73 +192,69 @@ export default function JoinPage() {
                                 <div id="test-l-2" className="content">
                                     <div className="form-group mt-2">
                                         <label
-                                            for="name"
+                                            htmlFor="name"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             이름을 입력하세요
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label={name}
+                                                label="name"
                                                 type="text"
                                                 onChange={(e) =>
-                                                    setName(e.target.value)
+                                                    handleValueChange(e)
                                                 }
                                             />
                                         </div>
 
                                         <label
-                                            for="registration-number"
+                                            htmlFor="registration-number"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             주민등록번호를 입력하세요 (-제외)
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label={registrationNumber}
+                                                label="registrationNumber"
                                                 type="password"
                                                 onChange={(e) =>
-                                                    setRegisterationNumber(
-                                                        e.target.value
-                                                    )
+                                                    handleValueChange(e)
                                                 }
                                             />
                                         </div>
 
                                         <label
-                                            for="email"
+                                            htmlFor="email"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             이메일을 입력하세요
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label={email}
+                                                label="email"
                                                 type="text"
                                                 onChange={(e) =>
-                                                    setEmail(e.target.value)
+                                                    handleValueChange(e)
                                                 }
                                             />
                                         </div>
                                         <label
-                                            for="phone-number"
+                                            htmlFor="phone-number"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             전화번호를 입력하세요 (-제외)
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label={phoneNumber}
+                                                label="phoneNumber"
                                                 type="text"
                                                 onChange={(e) =>
-                                                    setPhoneNumber(
-                                                        e.target.value
-                                                    )
+                                                    handleValueChange(e)
                                                 }
                                             />
                                         </div>
                                         <label
-                                            for="education"
+                                            htmlFor="education"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             최종학력을 입력하세요 (예,
@@ -260,10 +262,10 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label={education}
+                                                label="education"
                                                 type="text"
                                                 onChange={(e) =>
-                                                    setEducation(e.target.value)
+                                                    handleValueChange(e)
                                                 }
                                             />
                                         </div>
@@ -282,25 +284,23 @@ export default function JoinPage() {
                                 <div id="test-l-3" className="content">
                                     <div className="form-group mt-2">
                                         <label
-                                            for="experience-year"
+                                            htmlFor="experience-year"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             경력년수를 입력하세요
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label={experienceYear}
+                                                label="experienceYear"
                                                 type="text"
                                                 onChange={(e) =>
-                                                    setExperienceYear(
-                                                        e.target.value
-                                                    )
+                                                    handleValueChange(e)
                                                 }
                                             />
                                         </div>
 
                                         <label
-                                            for="position"
+                                            htmlFor="position"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             포지션을 선택하세요
@@ -308,9 +308,9 @@ export default function JoinPage() {
                                         <div className="mt-2 mb-4">
                                             <select
                                                 onChange={(e) =>
-                                                    setPosition(e.target.value)
+                                                    handleValueChange(e)
                                                 }
-                                                value={position}
+                                                value="position"
                                                 id="position"
                                                 name="position"
                                                 className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -327,7 +327,7 @@ export default function JoinPage() {
                                         </div>
 
                                         <label
-                                            for="rank"
+                                            htmlFor="rank"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             직급을 선택하세요
@@ -335,9 +335,9 @@ export default function JoinPage() {
                                         <div className="mt-2 mb-4">
                                             <select
                                                 onChange={(e) =>
-                                                    setRank(e.target.value)
+                                                    handleValueChange(e)
                                                 }
-                                                value={rank}
+                                                value="rank"
                                                 id="rank"
                                                 name="rank"
                                                 className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -354,7 +354,7 @@ export default function JoinPage() {
                                         </div>
 
                                         <label
-                                            for="skill"
+                                            htmlFor="skill"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             스킬을 입력하세요 (예, java,
@@ -362,10 +362,10 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label={skill}
+                                                label="skill"
                                                 type="text"
                                                 onChange={(e) =>
-                                                    setSkill(e.target.value)
+                                                    handleValueChange(e)
                                                 }
                                             />
                                         </div>

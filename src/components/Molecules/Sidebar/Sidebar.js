@@ -7,40 +7,50 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import React from "react";
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
-export default function Sidebar({ admin }) {
+export default function Sidebar({ isAdmin, setIsAdmin }) {
     const navigate = useNavigate();
-    let menus = [
-        { name: "프로젝트 조회", path: "/employee" },
-        { name: "평가", path: `/${admin}/evaluation` },
-        { name: "마이페이지", path: `/${admin}/mypage` },
-    ];
 
-    let icons = [
-        {
-            name: faFolderClosed,
-        },
-        { name: faChartSimple },
-        { name: faHouse },
-    ];
+    const location = useLocation();
+    useEffect(() => {
+        const admin = location.pathname.startsWith("/manager");
+        setIsAdmin(admin);
+        console.log(isAdmin);
+    });
 
-    console.log(admin);
-
-    if (admin === "manager") {
+    let menus = [];
+    let icons = [];
+    if (isAdmin) {
         menus = [
-            { name: "직원 관리", path: "/" },
-            { name: "프로젝트 관리", path: "/manager" },
-            { name: "프로젝트 생성", path: `/${admin}/newProject` },
-            { name: "평가 관리", path: `/${admin}/evaluation` },
-            { name: "마이페이지", path: `/${admin}/mypage` },
+            { name: "직원 관리", path: "/manager/employeeList" },
+            { name: "프로젝트 관리", path: "/manager/projectList" },
+            { name: "프로젝트 생성", path: `/manager/newProject` },
+            { name: "평가 관리", path: `/manager/evaluation` },
+            { name: "마이페이지", path: `/manager/mypage` },
         ];
 
         icons = [
             { name: faUser },
             { name: faFolderClosed },
             { name: faPen },
+            { name: faChartSimple },
+            { name: faHouse },
+        ];
+    }
+    if (!isAdmin) {
+        menus = [
+            { name: "프로젝트 조회", path: "/employee" },
+            { name: "평가", path: `/employee/evaluation` },
+            { name: "마이페이지", path: `/employee/mypage` },
+        ];
+
+        icons = [
+            {
+                name: faFolderClosed,
+            },
             { name: faChartSimple },
             { name: faHouse },
         ];
@@ -64,6 +74,7 @@ export default function Sidebar({ admin }) {
                             {menus[index].name}
                         </span>
                     </button>
+                    ;
                 </div>
             ))}
         </div>

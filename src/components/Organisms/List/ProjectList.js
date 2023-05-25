@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
-import Main from "./Main";
-import Sidebar from "./Sidebar";
+import Header from "../../Molecules/Header/Header";
+import Main from "../../Organisms/Main";
+import Sidebar from "../../Molecules/Sidebar/Sidebar";
 
 export default function ProjectList({ role, isAdmin, setIsAdmin }) {
     let subTitle = [

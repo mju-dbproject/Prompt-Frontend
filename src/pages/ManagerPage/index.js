@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Header from "../../components/Header";
-import Main from "../../components/Main";
-import Sidebar from "../../components/Sidebar";
+import Header from "../../components/Molecules/Header/Header";
+import Main from "../../components/Organisms/Main";
+import Sidebar from "../../components/Molecules/Sidebar/Sidebar";
 
 export default function ManagerPage() {
     const subTitle = [
