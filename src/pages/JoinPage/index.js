@@ -8,6 +8,10 @@ import Input from "../../components/Atoms/Input/Input";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import PwdIcon from "../../components/Atoms/Icon/PwIcon";
 import { useNavigate } from "react-router";
+import posts from "../../api/posts";
+import instance from "../../api/fetch";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { joinInfoState } from "../../hooks/recoil/atoms";
 
 export default function JoinPage() {
     const [pwType, setPwType] = useState({
@@ -18,7 +22,8 @@ export default function JoinPage() {
 
     const stepperRef = useRef(null);
 
-    const navigate = useNavigate();
+    const [availableId, setAvailableId] = useState(true);
+    const [correspondPassword, setCorrespondPassword] = useState(true);
 
     const educationList = ["고등학교", "대학교", "석사", "박사"];
     const positionList = [
@@ -31,20 +36,8 @@ export default function JoinPage() {
     ];
     const rankList = ["수석", "책임", "선임", "전임"];
 
-    const [joinInfo, setJoinInfo] = useState({
-        userId: "",
-        password: "",
-        repassword: "",
-        name: "",
-        registrationNumber: "",
-        email: "",
-        phoneNumber: "",
-        education: "",
-        experienceYear: "",
-        position: "",
-        rank: "",
-        skill: "",
-    });
+    const [joinInfo, setJoinInfo] = useRecoilState(joinInfoState);
+    const reset = useResetRecoilState(joinInfoState);
 
     useEffect(() => {
         stepperRef.current = new Stepper(document.querySelector("#stepper1"), {
@@ -54,33 +47,56 @@ export default function JoinPage() {
     }, []);
 
     const handleIdValidation = async () => {
-        const response = await fetch(
-            "https://2d55b3a9-65f0-40be-9a3b-9348ac5d5303.mock.pstmn.io/employee/check-id",
-            {
+        try {
+            const response = await fetch(
+                instance.baseURL + posts.fetchIDCheck,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ userId: joinInfo.userId }),
+                }
+            );
+            // const validation = await response.json();
+            const validation = false;
+            setAvailableId(validation);
+            validatePassword();
+            if (validation) {
+                stepperRef.current.next();
+            }
+        } catch (error) {
+            console.log("error occur");
+        }
+    };
+
+    const validatePassword = () => {
+        if (joinInfo.password !== joinInfo.repassword) {
+            setCorrespondPassword(false);
+        }
+    };
+    const handleSubmit = async () => {
+        try {
+            const response = await fetch(instance.baseURL + posts.fetchJoin, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    userId: joinInfo.userId,
-                }),
-            }
-        );
-
-        if (response.status === 400 || response.status === 500) {
-            console.log("Error occurred..");
+                body: JSON.stringify(joinInfo),
+            });
+            console.log(joinInfo);
+            reset();
+        } catch (error) {
+            console.log("error occur");
         }
-
-        console.log(response);
-        stepperRef.current.next();
     };
 
     const handleValueChange = (e) => {
         setJoinInfo({
             ...joinInfo,
-            [e.target.label]: e.target.value,
+            [e.target.name]: e.target.value,
         });
-        console.log(joinInfo);
+        // console.log("hi", e.target.value);
     };
 
     return (
@@ -125,30 +141,35 @@ export default function JoinPage() {
                                 <div id="test-l-1" className="content">
                                     <div className="form-group mt-2">
                                         <label
-                                            for="id"
+                                            htmlFor="id"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             아이디를 입력하세요
                                         </label>
                                         <div className="mt-2.5 mb-7">
                                             <Input
-                                                label="userId"
+                                                name="userId"
                                                 type="text"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
                                             />
+                                            {!availableId && (
+                                                <div className="text-sm mt-0.5 text-red-700">
+                                                    중복된 아이디입니다.
+                                                </div>
+                                            )}
                                         </div>
 
                                         <label
-                                            for="password"
+                                            htmlFor="password"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             비밀번호를 입력하세요
                                         </label>
                                         <div className="mt-2.5 mb-7 relative">
                                             <Input
-                                                label="password"
+                                                name="password"
                                                 type={pwType.type}
                                             />
                                             <PwdIcon
@@ -158,30 +179,37 @@ export default function JoinPage() {
                                         </div>
 
                                         <label
-                                            for="repassword"
+                                            htmlFor="repassword"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
                                             비밀번호를 재입력하세요
                                         </label>
                                         <div className="mt-2.5 relative">
                                             <Input
-                                                label="repassword"
+                                                name="repassword"
                                                 type={pwType.type}
                                                 onChange={(e) => {
                                                     handleValueChange(e);
+                                                    validatePassword(e);
                                                 }}
                                             />
                                             <PwdIcon
                                                 pwType={pwType}
                                                 setPwType={setPwType}
                                             />
+                                            {!correspondPassword && (
+                                                <div className="text-sm mt-0.5 text-red-700">
+                                                    비밀번호가 일치하지
+                                                    않습니다.
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
 
                                     <button
                                         type="submit"
-                                        className="flex w-full mt-44 justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        onClick={async (e) => {
+                                        className="flex w-full mt-36 justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        onClick={(e) => {
                                             e.preventDefault();
                                             handleIdValidation();
                                         }}
@@ -199,7 +227,7 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label="name"
+                                                name="name"
                                                 type="text"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
@@ -215,7 +243,7 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label="registrationNumber"
+                                                name="registrationNumber"
                                                 type="password"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
@@ -231,7 +259,7 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label="email"
+                                                name="email"
                                                 type="text"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
@@ -246,7 +274,7 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label="phoneNumber"
+                                                name="phoneNumber"
                                                 type="text"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
@@ -262,7 +290,7 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label="education"
+                                                name="education"
                                                 type="text"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
@@ -291,7 +319,7 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label="experienceYear"
+                                                name="experienceYear"
                                                 type="text"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
@@ -310,16 +338,12 @@ export default function JoinPage() {
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
-                                                value="position"
                                                 id="position"
                                                 name="position"
                                                 className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             >
                                                 {positionList.map((item) => (
-                                                    <option
-                                                        value={item}
-                                                        key={item}
-                                                    >
+                                                    <option key={item}>
                                                         {item}
                                                     </option>
                                                 ))}
@@ -337,16 +361,12 @@ export default function JoinPage() {
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
-                                                value="rank"
                                                 id="rank"
                                                 name="rank"
                                                 className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             >
                                                 {rankList.map((item) => (
-                                                    <option
-                                                        value={item}
-                                                        key={item}
-                                                    >
+                                                    <option key={item}>
                                                         {item}
                                                     </option>
                                                 ))}
@@ -362,7 +382,7 @@ export default function JoinPage() {
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                label="skill"
+                                                name="skill"
                                                 type="text"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
@@ -375,7 +395,8 @@ export default function JoinPage() {
                                         className="final-submit mt-48 flex w-full justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            navigate("/login");
+                                            handleSubmit();
+                                            // navigate("/login");
                                         }}
                                     >
                                         가입하기
