@@ -1,12 +1,21 @@
 import React from "react";
+import {
+    RecoilRoot,
+    atom,
+    selector,
+    useRecoilState,
+    useRecoilValue,
+} from "recoil";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>,
+    <RecoilRoot>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </RecoilRoot>,
     document.getElementById("root")
 );
 
