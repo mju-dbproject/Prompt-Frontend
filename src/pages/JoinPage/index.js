@@ -19,6 +19,7 @@ export default function JoinPage() {
         visible: false,
         icon: faEye,
     });
+    const navigate = useNavigate();
 
     const stepperRef = useRef(null);
 
@@ -87,6 +88,7 @@ export default function JoinPage() {
             });
             console.log(joinInfo);
             reset();
+            navigate("/login");
         } catch (error) {
             console.log("error occur");
         }
@@ -261,6 +263,7 @@ export default function JoinPage() {
                                             <Input
                                                 name="email"
                                                 type="email"
+                                                required
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }

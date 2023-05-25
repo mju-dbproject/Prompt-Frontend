@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { joinInfoState } from "../../../hooks/recoil/atoms";
+import { joinInfoState, loginInfoState } from "../../../hooks/recoil/atoms";
 
-export default function Input({ name, type }) {
+export default function Input({ name, type, page }) {
     const [joinInfo, setJoinInfo] = useRecoilState(joinInfoState);
+    const [loginInfo, setLoginInfo] = useRecoilState(loginInfoState);
     const setInfo = useSetRecoilState(joinInfoState);
+    const setLogin = useSetRecoilState(loginInfoState);
 
     const handleValueChange = (e) => {
-        setInfo({
-            ...joinInfo,
-            [e.target.name]: e.target.value,
-        });
+        if (page === "login") {
+            setLogin({
+                ...loginInfo,
+                [e.target.name]: e.target.value,
+            });
+        } else {
+            setInfo({
+                ...joinInfo,
+                [e.target.name]: e.target.value,
+            });
+        }
     };
 
     return (

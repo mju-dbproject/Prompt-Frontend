@@ -37,3 +37,11 @@ export const joinInfoState = atom({
         skill: "",
     },
 });
+
+export const loginInfoState = atom({
+    key: "loginInfoState",
+    default: {
+        userId: "",
+        password: "",
+    },
+});
