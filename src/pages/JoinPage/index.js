@@ -58,11 +58,10 @@ export default function JoinPage() {
                     body: JSON.stringify({ userId: joinInfo.userId }),
                 }
             );
-            // const validation = await response.json();
-            const validation = false;
+            const validation = await response.json();
             setAvailableId(validation);
             validatePassword();
-            if (validation) {
+            if (validation && joinInfo.password === joinInfo.repassword) {
                 stepperRef.current.next();
             }
         } catch (error) {
@@ -73,6 +72,8 @@ export default function JoinPage() {
     const validatePassword = () => {
         if (joinInfo.password !== joinInfo.repassword) {
             setCorrespondPassword(false);
+        } else {
+            setCorrespondPassword(true);
         }
     };
     const handleSubmit = async () => {
@@ -190,7 +191,6 @@ export default function JoinPage() {
                                                 type={pwType.type}
                                                 onChange={(e) => {
                                                     handleValueChange(e);
-                                                    validatePassword(e);
                                                 }}
                                             />
                                             <PwdIcon
@@ -260,7 +260,7 @@ export default function JoinPage() {
                                         <div className="mt-2 mb-4">
                                             <Input
                                                 name="email"
-                                                type="text"
+                                                type="email"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
