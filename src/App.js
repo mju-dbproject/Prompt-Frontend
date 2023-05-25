@@ -35,12 +35,9 @@ const App = () => {
                     element={<EvaluationPage />}
                 />
 
-                <Route
-                    path="/employee/detailProject"
-                    element={<ProjectDetailPage />}
-                />
+                <Route path="/employee/:id" element={<ProjectDetailPage />} />
 
-                <Route path="/manager" element={<ManagerPage />} />
+                <Route path="/manager" element={<ProjectManage />} />
 
                 {/* manager */}
                 <Route
@@ -55,10 +52,7 @@ const App = () => {
                     path="/manager/newProject"
                     element={<ProjectCreatePage />}
                 />
-                <Route
-                    path="/manager/detailProject"
-                    element={<ProjectDetailPage />}
-                />
+                <Route path="/manager/:id" element={<ProjectDetailPage />} />
                 <Route
                     path="/manager/evaluation"
                     element={<EvaluationPage />}
