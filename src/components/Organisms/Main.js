@@ -9,6 +9,9 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { allProjectsState } from "../../hooks/recoil/atoms";
 import ProjectTable from "../Atoms/Table/ProjectTable";
 
+import requests from "../../api/requests";
+import instance from "../../api/fetch";
+
 export default function Main({ subTitle, cols, isAdmin }) {
     const [selectedDate, setSelectedDate] = useState(null);
 
@@ -34,7 +37,7 @@ export default function Main({ subTitle, cols, isAdmin }) {
         const fetchData = async () => {
             const all = await fetchGetAllProject();
             setProjects(all);
-            console.log(allProjects);
+            console.log(all);
         };
         fetchData();
     }, []);
@@ -42,10 +45,21 @@ export default function Main({ subTitle, cols, isAdmin }) {
     const fetchGetAllProject = async (searchTerm) => {
         try {
             const request = await fetch(
-                "https://2d55b3a9-65f0-40be-9a3b-9348ac5d5303.mock.pstmn.io/api/project/all"
+                instance.baseURL + requests.fetchProjectList,
+                {
+                    method: "GET",
+                    headers: {
+                        "content-type": "application/json",
+                        Authorization:
+                            `Bearer ` + localStorage.getItem("login-token"),
+                    },
+                }
             );
             const response = await request.json();
             console.log(response);
+            if (!response.ok) {
+                console.log("API 요청 실패");
+            }
             return response.projects;
         } catch (error) {
             console.log("error", error);
