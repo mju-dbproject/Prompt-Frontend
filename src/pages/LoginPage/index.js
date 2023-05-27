@@ -37,6 +37,9 @@ export default function LoginPage() {
             console.log(loginInfo);
             localStorage.setItem("login-token", res.accessToken);
             navigate("/manager");
+            if (!response.ok) {
+                console.log("API 요청 실패");
+            }
         } catch (error) {
             console.log(error, "error");
         }
