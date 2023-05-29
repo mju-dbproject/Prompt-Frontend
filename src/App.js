@@ -6,7 +6,6 @@ import LoginPage from "./pages/LoginPage";
 import EmployeePage from "./pages/EmployeePage";
 import JoinPage from "./pages/JoinPage";
 import MyPage from "./pages/MyPage";
-import ManagerPage from "./pages/ManagerPage";
 import ProjectCreatePage from "./pages/ProjectCreate";
 import EvaluationPage from "./pages/EvaluationPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
@@ -27,7 +26,10 @@ const App = () => {
 
                 {/* employee */}
 
-                <Route path="/employee" element={<EmployeePage />} />
+                <Route
+                    path="/employee/projectList"
+                    element={<EmployeePage />}
+                />
 
                 <Route path="/employee/mypage" element={<MyPage />} />
                 <Route
@@ -35,9 +37,15 @@ const App = () => {
                     element={<EvaluationPage />}
                 />
 
-                <Route path="/employee/:id" element={<ProjectDetailPage />} />
+                <Route
+                    path="/employee/project/:id"
+                    element={<ProjectDetailPage />}
+                />
 
-                <Route path="/manager" element={<ProjectManage />} />
+                <Route
+                    path="/manager/projectList"
+                    element={<ProjectManage />}
+                />
 
                 {/* manager */}
                 <Route
@@ -52,7 +60,10 @@ const App = () => {
                     path="/manager/newProject"
                     element={<ProjectCreatePage />}
                 />
-                <Route path="/manager/:id" element={<ProjectDetailPage />} />
+                <Route
+                    path="/manager/project/:id"
+                    element={<ProjectDetailPage />}
+                />
                 <Route
                     path="/manager/evaluation"
                     element={<EvaluationPage />}
