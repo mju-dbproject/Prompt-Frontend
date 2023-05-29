@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Molecules/Header/Header";
 import Sidebar from "../../components/Molecules/Sidebar/Sidebar";
 
@@ -6,6 +6,12 @@ import EmployeeModal from "../../components/EmployeeModal";
 
 import "./projectCreate.css";
 import { useNavigate } from "react-router";
+
+import ShowTable from "../../components/Atoms/Table/ShowTable";
+import { useRecoilState } from "recoil";
+import { selectedEmployeesState } from "../../hooks/recoil/atoms";
+import instance from "../../api/fetch";
+import posts from "../../api/posts";
 
 export default function ProjectCreatePage() {
     const [isAdmin, setIsAdmin] = useState(null);
@@ -16,11 +22,16 @@ export default function ProjectCreatePage() {
 
     const cols = ["발주처명", "프로젝트명", "시작일자", "종료일자", "상태"];
 
+    const [selectedEmployee, setSelectedEmployee] = useRecoilState(
+        selectedEmployeesState
+    );
+
     const [projectInfo, setProjectInfo] = useState({
         name: "",
         description: "",
         client: "",
         budget: "",
+        employeeList: [],
     });
 
     const handleValueChange = (e) => {
@@ -36,6 +47,41 @@ export default function ProjectCreatePage() {
         setModalOpen(true);
     };
 
+    const handleCreate = () => {
+        if (window.confirm("프로젝트를 생성하시겠습니까?")) {
+            alert("생성되었습니다!");
+            navigate("/manager");
+        }
+
+        projectInfo.employeeList = selectedEmployee.map((emp, index) => ({
+            id: emp.id,
+            task: emp.task,
+        }));
+        console.log(projectInfo.employeeList);
+
+        console.log("결과", projectInfo);
+        fetchProjectNew();
+    };
+
+    const fetchProjectNew = async () => {
+        try {
+            const request = await fetch(
+                instance.baseURL + posts.fetchProjectNew,
+                {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                        Authorization:
+                            `Bearer ` + localStorage.getItem("login-token"),
+                    },
+                    body: JSON.stringify(projectInfo),
+                }
+            );
+            console.log(request);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <div>
             <Header role={role} isAdmin={isAdmin}></Header>
@@ -55,16 +101,7 @@ export default function ProjectCreatePage() {
                             <button
                                 type="submit"
                                 className="w-30 h-10 mr-16 rounded-md bg-sub-color px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                onClick={() => {
-                                    if (
-                                        window.confirm(
-                                            "프로젝트를 생성하시겠습니까?"
-                                        )
-                                    ) {
-                                        alert("생성되었습니다!");
-                                        navigate("/manager");
-                                    }
-                                }}
+                                onClick={handleCreate}
                             >
                                 생성하기
                             </button>
@@ -79,7 +116,7 @@ export default function ProjectCreatePage() {
                                         type="text"
                                         name="name"
                                         id="name"
-                                        autocomplete="given-name"
+                                        autoComplete="given-name"
                                         className="w-5/6 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
                                         onChange={handleValueChange}
                                     ></input>{" "}
@@ -94,7 +131,7 @@ export default function ProjectCreatePage() {
                                         type="text"
                                         name="description"
                                         id="description"
-                                        autocomplete="on"
+                                        autoComplete="on"
                                         className="w-5/6 rounded-md ml-3 border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
                                         onChange={handleValueChange}
                                     ></input>{" "}
@@ -109,7 +146,7 @@ export default function ProjectCreatePage() {
                                         type="text"
                                         name="client"
                                         id="client"
-                                        autocomplete="on"
+                                        autoComplete="on"
                                         className="w-5/6 rounded-md ml-3.5 border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
                                         onChange={handleValueChange}
                                     ></input>{" "}
@@ -125,7 +162,7 @@ export default function ProjectCreatePage() {
                                         type="text"
                                         name="budget"
                                         id="budget"
-                                        autocomplete="on"
+                                        autoComplete="on"
                                         className="w-5/6 ml-4.5 rounded-md border-1 border-zinc-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-5"
                                         onChange={handleValueChange}
                                     ></input>{" "}
@@ -144,7 +181,7 @@ export default function ProjectCreatePage() {
                                     </button>
                                 </div>
 
-                                {/* <ShowTable /> */}
+                                <ShowTable />
                             </div>
                         </div>
                     </div>
