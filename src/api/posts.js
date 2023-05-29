@@ -7,7 +7,7 @@ const posts = {
     fetchUserApprove: "/api/employee/approval",
     fetchEmployeePromotion: "/api/employee/admin/promotion",
     fetchProjectNew: "/api/admin/project",
-    fetchProjectEdit: "/api/project",
+    fetchProjectEdit: "/api/admin/project",
     fetchManpowerEvaluation: "/api/evaluation/{evaluated_id}",
     fetchManpowerAddition: "/api/manpower/{project_id}",
     fetchManpowerPossibleList: "/api/manpower/available/1",
