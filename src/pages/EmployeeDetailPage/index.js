@@ -40,14 +40,7 @@ export default function EmployeeDetailPage() {
                                     </span>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 gap-2 pt-2 px-0">
-                                <div className="px-2 py-3">
-                                    <Label value="총 투입일수" />
-                                    <span className="w-5/6 text-md leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        email
-                                    </span>
-                                </div>
-                            </div>
+
                             <div className="grid grid-cols-1 gap-2 pt-2 px-0">
                                 <div className="px-2 py-3">
                                     <Label value="진행중인 프로젝트" />
