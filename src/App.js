@@ -13,6 +13,7 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 import ProjectManage from "./pages/ProjectManage";
 import EmployeeManage from "./pages/EmployeeManage";
 import NotApprovePage from "./pages/NotApprovePage";
+import EmployeeDetailPage from "./pages/EmployeeDetailPage";
 
 const App = () => {
     return (
@@ -51,6 +52,11 @@ const App = () => {
                 <Route
                     path="/manager/employeeList"
                     element={<EmployeeManage />}
+                />
+
+                <Route
+                    path="/manager/employeeList/:id"
+                    element={<EmployeeDetailPage />}
                 />
                 <Route
                     path="/manager/projectList"

@@ -87,11 +87,7 @@ export default function ProjectCreatePage() {
             <Header role={role} isAdmin={isAdmin}></Header>
 
             <div className="grid grid-cols-6 mx-auto">
-                <Sidebar
-                    className="col-span-1"
-                    isAdmin={isAdmin}
-                    setIsAdmin={setIsAdmin}
-                ></Sidebar>
+                <Sidebar className="col-span-1"></Sidebar>
                 <div className="bg-gray-100 col-span-5 h-screen px-20 pt-10 auto-rows-auto">
                     <div className="bg-white drop-shadow-md container w-5/6 h-5/6 mx-40 rounded border-2 border-slate-200 px-5 mb-20">
                         <div className="flex justify-between pt-10 pb-3">
