@@ -5,12 +5,17 @@ import {
     selectedEmployeesState,
     allManpowerState,
     allManpowerEndState,
+    selectedEmployeeNewState,
 } from "../../../hooks/recoil/atoms";
 
-export default function ShowTable({ detailProject, id }) {
+export default function ShowNewTable({ detailProject }) {
     const selectedcols = ["사번", "이름", "스킬", "직급", "포지션", "직무"];
     const [selectedEmployees, setSelectedEmployees] = useRecoilState(
         selectedEmployeesState
+    );
+
+    const [selectedNewEmployee, setSelectedNewEmployee] = useRecoilState(
+        selectedEmployeeNewState
     );
 
     const [manpowerList, setManpowerList] = useRecoilState(allManpowerState);
@@ -18,13 +23,8 @@ export default function ShowTable({ detailProject, id }) {
         useRecoilState(allManpowerEndState);
 
     useEffect(() => {
-        console.log("manpowerList", manpowerList);
-        console.log("selectedEmployees", selectedEmployees);
-    });
-    // useEffect(() => {
-    //     console.log("엔드엔드", endManpowerList);
-    //     // detailProject.endManpowerList = endManpowerList;
-    // }, [endManpowerList]);
+        setSelectedEmployees([]);
+    }, []);
 
     const handleClick = (id) => {
         let employees = selectedEmployees.filter(
@@ -32,14 +32,22 @@ export default function ShowTable({ detailProject, id }) {
         );
 
         // console.log("update", manpowerList);
-
-        setEndManpowerList((prev) => [...prev, id]);
-        // detailProject.endManpowerList = endManpowerList;
+        detailProject.endManpowerList = endManpowerList;
+        setEndManpowerList((prev) => {
+            if (prev.includes(id)) {
+                // 이미 배열에 id가 존재하면 기존 배열 반환
+                return [prev];
+            } else {
+                // 새로운 id 추가한 배열 반환
+                return [...prev, id];
+            }
+        });
 
         setSelectedEmployees(employees);
         setManpowerList(employees);
-        console.log("End임플로이", endManpowerList);
-        // console.log("엔드엔드", endManpowerList);
+
+        console.log("selected임플로이", selectedEmployees);
+        console.log("엔드엔드", endManpowerList);
     };
 
     return (
@@ -62,16 +70,6 @@ export default function ShowTable({ detailProject, id }) {
                                 <td>{employee.rank}</td>
                                 <td>{employee.position}</td>
                                 <td>{employee.task}</td>
-                                <td>
-                                    <button
-                                        className="h-fit w-fit button rounded-md text-sm border border-zinc-300 px-1.5 py-1.5 mr-3 my-0.5"
-                                        onClick={(e) =>
-                                            handleClick(employee.id)
-                                        }
-                                    >
-                                        투입종료
-                                    </button>
-                                </td>
                             </tr>
                         ))}
                     </tbody>

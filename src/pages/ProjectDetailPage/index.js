@@ -6,21 +6,30 @@ import Label from "../../components/Atoms/Label/Label";
 import ShowTable from "../../components/Atoms/Table/ShowTable";
 
 import Sidebar from "../../components/Molecules/Sidebar/Sidebar";
+import { useRecoilState } from "recoil";
+import { useParams } from "react-router-dom";
 import {
-    useRecoilState,
-    useRecoilValue,
-    useSetRecoilState,
-    useResetRecoilState,
-} from "recoil";
-import { useParams } from "react-router";
-import { allProjectsState } from "../../hooks/recoil/atoms";
+    adminState,
+    allManpowerEndState,
+    allManpowerState,
+    selectedEmployeesState,
+} from "../../hooks/recoil/atoms";
+import instance from "../../api/fetch";
+import requests from "../../api/requests";
 
 export default function ProjectDetailPage() {
-    const [isAdmin, setIsAdmin] = useState(true);
-    const [allProjects, setAllProjects] = useRecoilState(allProjectsState);
+    const [isAdmin, setIsAdmin] = useRecoilState(adminState);
+
+    const [state, setState] = useState("");
+
+    const [manpowerList, setManpowerList] = useRecoilState(allManpowerState);
+    const [selectedEmployee, setSelectedEmployee] = useRecoilState(
+        selectedEmployeesState
+    );
+    const [endManpowerList, setEndManpowerList] =
+        useRecoilState(allManpowerEndState);
 
     const { id } = useParams();
-    // const detailProject =;
 
     const role = isAdmin ? "경영인" : "직원";
 
@@ -35,20 +44,66 @@ export default function ProjectDetailPage() {
         client: "",
         startDate: "",
         budget: "",
-        manpowerList: [
-            {
-                id: "",
-                name: "",
-                task: "",
-            },
-        ],
+        addEmployeeList: [],
+        endManpowerList: [],
     });
+    const handleValueChange = (e) => {
+        setDetailProject({
+            ...detailProject,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const params = useParams();
+    console.log("params : ", params);
 
     useEffect(() => {
-        // console.log(id, "is project id!");
-        setDetailProject(allProjects[id - 1]);
-        console.log(detailProject);
-    });
+        console.log({ id });
+
+        const fetchData = async () => {
+            const all = await fetchGetDetailProject();
+
+            console.log("마지막 체크", detailProject);
+        };
+        fetchData();
+    }, []);
+
+    const fetchGetDetailProject = async () => {
+        try {
+            const request = await fetch(
+                instance.baseURL + requests.fetchProjectDetail + `/${id}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "content-type": "application/json",
+                        Authorization:
+                            `Bearer ` + localStorage.getItem("login-token"),
+                    },
+                }
+            );
+            const response = await request.json();
+            console.log("응답이왓소", response);
+            if (response.status === "완료") {
+                setState(3);
+            }
+            if (response.status === "준비") {
+                setState(1);
+            }
+            if (response.status === "진행") {
+                setState(2);
+            }
+            if (response.status === "취소") {
+                setState(4);
+            }
+            setDetailProject(response);
+            setManpowerList(response.manpowerList);
+            setSelectedEmployee(response.manpowerList);
+            setEndManpowerList([]);
+            return response;
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
 
     const handleClick = () => {
         setModalOpen(true);
@@ -57,23 +112,21 @@ export default function ProjectDetailPage() {
     if (isEditing) {
         return (
             <div>
-                <Header role={role} isAdmin={isAdmin}></Header>
+                <Header></Header>
                 <div className="grid grid-cols-6 mx-auto">
-                    <Sidebar
-                        className="col-span-1"
-                        isAdmin={isAdmin}
-                        setIsAdmin={setIsAdmin}
-                    ></Sidebar>
+                    <Sidebar className="col-span-1"></Sidebar>
                     <div className="bg-gray-100 col-span-5 h-screen px-20 pt-10 auto-rows-auto">
                         <div className="bg-white drop-shadow-md container w-5/6 h-5/6 mx-40 rounded border-2 border-slate-200 px-5 mb-20">
                             <div className="text-2xl font-medium pt-10 pb-4 text-start">
-                                사내 웹 서비스 구축
+                                {detailProject.name}
                             </div>
                             <div className="divide-y divide-gray-200">
                                 <div className="grid grid-cols-1 gap-2 px-0">
                                     <div className="px-2 py-3">
                                         <Label value="상세 설명" />
                                         <input
+                                            value={detailProject.name}
+                                            onChange={handleValueChange}
                                             type="text"
                                             name="description"
                                             id="description"
@@ -86,6 +139,8 @@ export default function ProjectDetailPage() {
                                     <div className="px-2 py-3">
                                         <Label value="발주처" />
                                         <input
+                                            value={detailProject.client}
+                                            onChange={handleValueChange}
                                             type="text"
                                             name="client"
                                             id="client"
@@ -97,7 +152,7 @@ export default function ProjectDetailPage() {
                                     <div className="px-2 py-3">
                                         <Label value="착수일자" />
                                         <span className="w-5/6 text-md leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                            2021.05.01
+                                            {detailProject.startDate}
                                         </span>
                                     </div>
                                 </div>
@@ -105,6 +160,8 @@ export default function ProjectDetailPage() {
                                     <div className="px-2 py-3">
                                         <Label value="예산" />
                                         <input
+                                            value={detailProject.budget}
+                                            onChange={handleValueChange}
                                             type="text"
                                             name="description"
                                             id="description"
@@ -124,7 +181,7 @@ export default function ProjectDetailPage() {
                                             </button>
                                         )}
                                     </div>
-                                    <ShowTable isEditing={isEditing} />
+                                    <ShowTable detailProject={detailProject} />
                                 </div>
                             </div>
 
@@ -132,6 +189,7 @@ export default function ProjectDetailPage() {
                                 <ButtonLists
                                     isEditing={isEditing}
                                     setIsEditing={setIsEditing}
+                                    detailProject={detailProject}
                                 />
                             )}
                         </div>
@@ -139,20 +197,20 @@ export default function ProjectDetailPage() {
                 </div>
 
                 {modalOpen && (
-                    <EmployeeModal setModalOpen={setModalOpen} cols={cols} />
+                    <EmployeeModal
+                        setModalOpen={setModalOpen}
+                        cols={cols}
+                        id={id}
+                    />
                 )}
             </div>
         );
     } else {
         return (
             <div>
-                <Header role={role} isAdmin={isAdmin}></Header>
+                <Header></Header>
                 <div className="grid grid-cols-6 mx-auto">
-                    <Sidebar
-                        className="col-span-1"
-                        isAdmin={isAdmin}
-                        setIsAdmin={setIsAdmin}
-                    ></Sidebar>
+                    <Sidebar className="col-span-1"></Sidebar>
                     <div className="bg-gray-100 col-span-5 h-screen px-20 pt-10 auto-rows-auto">
                         <div className="bg-white drop-shadow-md container w-5/6 h-5/6 mx-40 rounded border-2 border-slate-200 px-5 mb-20">
                             <div className="text-2xl font-medium pt-10 pb-4 text-start">
@@ -204,16 +262,14 @@ export default function ProjectDetailPage() {
                                         )}
                                     </div>
 
-                                    <ShowTable
-                                        isEditing={isEditing}
-                                        detailProject={detailProject}
-                                    />
+                                    <ShowTable detailProject={detailProject} />
                                 </div>
                             </div>
                             {isAdmin && (
                                 <ButtonLists
                                     isEditing={isEditing}
                                     setIsEditing={setIsEditing}
+                                    detailProject={detailProject}
                                 />
                             )}
                         </div>

@@ -3,7 +3,12 @@ import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
 import instance from "../../../api/fetch";
 import posts from "../../../api/posts";
-import { selectedEmployeesState } from "../../../hooks/recoil/atoms";
+import patchs from "../../../api/patchs";
+import {
+    allManpowerEndState,
+    allNewAddEmployeeState,
+    selectedEmployeesState,
+} from "../../../hooks/recoil/atoms";
 
 export default function ButtonLists({
     isEditing,
@@ -12,6 +17,9 @@ export default function ButtonLists({
 }) {
     const value = isEditing ? "저장하기" : "수정하기";
     const navigate = useNavigate();
+
+    const [endManpowerList, setEndManpowerList] =
+        useRecoilState(allManpowerEndState);
 
     const [sendProject, setSendProject] = useState({
         name: "",
@@ -26,22 +34,30 @@ export default function ButtonLists({
         selectedEmployeesState
     );
 
+    const [newAddEmployee, setNewAddEmployee] = useRecoilState(
+        allNewAddEmployeeState
+    );
+
     const handleClick = () => {
         if (isEditing) {
         } else {
+            fetchProjectState();
             alert("프로젝트를 종료시킵니다.");
+            navigate("/manager/projectList");
         }
     };
 
     const handleCancel = () => {
+        fetchProjectState();
         alert("프로젝트를 취소시킵니다.");
+        navigate("/manager/projectList");
     };
 
     const handleSave = () => {
         if (isEditing && window.confirm("저장하시겠습니까?")) {
             alert("저장되었습니다!");
-            navigate("/manager");
-            detailProject.addEmployeeList = selectedEmployee.map(
+            navigate("/manager/projectList");
+            detailProject.addEmployeeList = newAddEmployee.map(
                 (emp, index) => ({
                     id: emp.id,
                     task: emp.task,
@@ -56,13 +72,35 @@ export default function ButtonLists({
                 budget: detailProject.budget,
                 description: detailProject.description,
                 addEmployeeList: detailProject.addEmployeeList,
-                endManpowerList: detailProject.endManpowerList,
+                endManpowerList: endManpowerList,
             });
             fetchProjectEdit();
         }
         setIsEditing(!isEditing);
+        // setNewAddEmployee([]);
     };
 
+    const fetchProjectState = async () => {
+        try {
+            const request = await fetch(
+                instance.baseURL +
+                    patchs.fetchProjectState +
+                    `/${detailProject.id}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "content-type": "application/json",
+                        Authorization:
+                            `Bearer ` + localStorage.getItem("login-token"),
+                    },
+                }
+            );
+            const response = await request;
+            console.log("status", "");
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const fetchProjectEdit = async () => {
         try {
             const request = await fetch(
@@ -81,21 +119,22 @@ export default function ButtonLists({
                         client: detailProject.client,
                         budget: detailProject.budget,
                         description: detailProject.description,
-                        addEmployeeList: detailProject.addEmployeeList,
-                        endManpowerList: detailProject.endManpowerList,
+                        addEmployeeList: newAddEmployee,
+                        endManpowerList: endManpowerList,
                     }),
                 }
             );
-            const response = await request;
-            console.log(response);
-            // console.log({
-            //     name: detailProject.name,
-            //     client: detailProject.client,
-            //     budget: detailProject.budget,
-            //     description: detailProject.description,
-            //     addEmployeeList: detailProject.addEmployeeList,
-            //     endManpowerList: detailProject.endManpowerList,
-            // });
+            const response = await request.json();
+            console.log("마지막으로 함 보자");
+            console.log({
+                name: detailProject.name,
+                client: detailProject.client,
+                budget: detailProject.budget,
+                description: detailProject.description,
+                addEmployeeList: newAddEmployee,
+                endManpowerList: endManpowerList,
+            });
+            console.log("응답왓슴", response);
         } catch (error) {
             console.log(error);
         }

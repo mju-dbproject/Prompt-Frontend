@@ -8,14 +8,17 @@ import requests from "../../api/requests";
 import puts from "../../api/puts";
 import EmployeeDetailTable from "../../components/Atoms/Table/EmployeeDetailTable";
 
-export default function EmployeeDetailPage() {
+export default function EmployeeDetailPage({ id }) {
     const [isAdmin, setIsAdmin] = useState(null);
 
     const role = isAdmin ? "경영인" : "직원";
+    useEffect(() => {
+        console.log("ididi", id);
+    });
 
     return (
         <div>
-            <Header role={role} isAdmin={isAdmin}></Header>
+            <Header></Header>
 
             <div className="grid grid-cols-6 mx-auto">
                 <Sidebar className="col-span-1"></Sidebar>

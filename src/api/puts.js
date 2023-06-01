@@ -1,6 +1,6 @@
 const puts = {
     fetchUserInfo: "/api/user/info",
-    fetchUserPassword: "/api/employee/password",
+    fetchUserPassword: "/api/user/password",
     fetchProject: "/api/project",
     fetchUserApprove: "/api/user/approval",
 };

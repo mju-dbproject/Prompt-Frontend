@@ -9,9 +9,13 @@ import { useNavigate } from "react-router";
 
 import ShowTable from "../../components/Atoms/Table/ShowTable";
 import { useRecoilState } from "recoil";
-import { selectedEmployeesState } from "../../hooks/recoil/atoms";
+import {
+    allManpowerState,
+    selectedEmployeesState,
+} from "../../hooks/recoil/atoms";
 import instance from "../../api/fetch";
 import posts from "../../api/posts";
+import ShowNewTable from "../../components/Atoms/Table/ShowNewTable";
 
 export default function ProjectCreatePage() {
     const [isAdmin, setIsAdmin] = useState(null);
@@ -25,6 +29,7 @@ export default function ProjectCreatePage() {
     const [selectedEmployee, setSelectedEmployee] = useRecoilState(
         selectedEmployeesState
     );
+    const [allEmployees, setAllEmployees] = useRecoilState(allManpowerState);
 
     const [projectInfo, setProjectInfo] = useState({
         name: "",
@@ -50,7 +55,7 @@ export default function ProjectCreatePage() {
     const handleCreate = () => {
         if (window.confirm("프로젝트를 생성하시겠습니까?")) {
             alert("생성되었습니다!");
-            navigate("/manager");
+            navigate("/manager/projectList");
         }
 
         projectInfo.employeeList = selectedEmployee.map((emp, index) => ({
@@ -84,7 +89,7 @@ export default function ProjectCreatePage() {
     };
     return (
         <div>
-            <Header role={role} isAdmin={isAdmin}></Header>
+            <Header></Header>
 
             <div className="grid grid-cols-6 mx-auto">
                 <Sidebar className="col-span-1"></Sidebar>
@@ -177,7 +182,7 @@ export default function ProjectCreatePage() {
                                     </button>
                                 </div>
 
-                                <ShowTable />
+                                <ShowNewTable />
                             </div>
                         </div>
                     </div>

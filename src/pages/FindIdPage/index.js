@@ -1,24 +1,20 @@
-import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import Input from "../../components/Atoms/Input/Input";
-import PwdIcon from "../../components/Atoms/Icon/PwIcon";
-import { useRecoilState } from "recoil";
-import {
-    adminState,
-    loginInfoState,
-    nameState,
-} from "../../hooks/recoil/atoms";
 import instance from "../../api/fetch";
 import posts from "../../api/posts";
+import { useRecoilState } from "recoil";
+import { findIdInfoState } from "../../hooks/recoil/atoms";
+import { faEye } from "@fortawesome/free-regular-svg-icons";
+import PwdIcon from "../../components/Atoms/Icon/PwIcon";
+import { useNavigate } from "react-router";
 
-export default function LoginPage() {
+export default function FindIdPage() {
+    const [findIdInfo, setFindIdInfo] = useRecoilState(findIdInfoState);
+    useEffect(() => {
+        console.log("가져왔나?", findIdInfo);
+    });
+    const [id, setId] = useState("");
     const navigate = useNavigate();
-
-    const [isAdmin, setIsAdmin] = useRecoilState(adminState);
-
-    const [name, setName] = useRecoilState(nameState);
 
     const [pwType, setPwType] = useState({
         type: "password",
@@ -26,44 +22,35 @@ export default function LoginPage() {
         icon: faEye,
     });
 
-    const [loginInfo, setLoginInfo] = useRecoilState(loginInfoState);
+    const handleCheck = async (e) => {
+        e.preventDefault();
+        const all = await fetchIDfind(); // await를 추가
+        console.log(all);
+        setId(all);
+        alert(`회원아이디는 ${all}입니다.`); // Promise 대신 실제 값을 표시
+        navigate("/login");
+    };
 
-    const handleSubmit = async (e) => {
+    const fetchIDfind = async () => {
         try {
-            e.preventDefault();
-            const response = await fetch(instance.baseURL + posts.fetchLogin, {
+            const request = await fetch(instance.baseURL + posts.fetchIDfind, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(loginInfo),
+                body: JSON.stringify(findIdInfo),
             });
-            const res = await response.json();
-            console.log(res, "응답이 잘 오는가?");
-            console.log("내가 뭘로 로그인", loginInfo);
-            setName(res.name);
-            setIsAdmin(res.role === "ROLE_ADMIN");
-            localStorage.setItem("login-token", res.accessToken);
-            if (isAdmin) {
-                navigate("/manager/projectList");
-            } else {
-                if (res.role === "ROLE_NOT_APPROVED_USER") {
-                    navigate("/notApprove");
-                }
-                if (res.role === "ROLE_APPROVED_USER") {
-                    navigate("/employee/projectList");
-                }
-            }
+            const response = await request.json();
+            return response.userId;
         } catch (error) {
-            console.log(error, "error");
+            console.log(error);
         }
     };
-
     return (
         <div className="flex items-center justify-center w-screen h-screen bg-gray-100">
             <div className="flex-col items-center w-full h-3/4 p-6 bg-white rounded shadow lg:w-2/5">
                 <div className="text-2xl font-medium mt-3 text-center">
-                    로그인
+                    아이디 찾기
                 </div>
                 <form className="flex flex-col" action="/employee">
                     <div className="grid m-10">
@@ -72,26 +59,25 @@ export default function LoginPage() {
                                 htmlFor="userId"
                                 className="block text-base font-medium leading-6 text-gray-900"
                             >
-                                아이디를 입력하세요
+                                이름을 입력하세요
                             </label>
                             <div className="mt-2.5 mb-7">
-                                <Input name="userId" type="text" page="login" />
+                                <Input name="name" type="text" page="findId" />
                             </div>
                         </div>
                         <div>
                             <label
-                                htmlFor="password"
+                                htmlFor="registerNumber"
                                 className="block text-base font-medium leading-6 text-gray-900"
                             >
-                                비밀번호를 입력하세요
+                                주민등록번호를 입력하세요 (-로 분리)
                             </label>
                             <div className="mt-2.5 relative">
                                 <Input
-                                    name="password"
-                                    page="login"
-                                    type={pwType.type}
+                                    name="registerNumber"
+                                    page="findId"
+                                    type="password"
                                 />
-
                                 <PwdIcon
                                     pwType={pwType}
                                     setPwType={setPwType}
@@ -103,35 +89,19 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             className="flex w-full justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            onClick={handleSubmit}
+                            onClick={handleCheck}
                         >
-                            로그인
+                            확인하기
                         </button>
                     </div>
                 </form>
-
-                <p className="text-center text-sm text-gray-500">
+                <p className="mt-10 text-center text-sm text-gray-500">
                     회원이 아니신가요? &nbsp;
                     <a
                         href="/join"
                         className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
                     >
                         회원가입하기
-                    </a>
-                </p>
-                <p className="text-center text-sm">
-                    <a
-                        href="/findId"
-                        className="text-center test-sm font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-                    >
-                        아이디 찾기
-                    </a>
-                    <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-                    <a
-                        href="/passwordreset"
-                        className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-                    >
-                        비밀번호 변경
                     </a>
                 </p>
             </div>

@@ -9,21 +9,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { adminState } from "../../../hooks/recoil/atoms";
 
-export default function Sidebar({ isAdmin, setIsAdmin }) {
+export default function Sidebar() {
     const navigate = useNavigate();
 
-    const location = useLocation();
-    useEffect(() => {
-        const admin = location.pathname.startsWith("/manager");
-        setIsAdmin(admin);
-        console.log(isAdmin);
-    });
+    const [admin, setAdmin] = useRecoilState(adminState);
 
     let menus = [];
     let icons = [];
-    if (isAdmin) {
+    if (admin) {
         menus = [
             { name: "직원 관리", path: "/manager/employeeList" },
             { name: "프로젝트 관리", path: "/manager/projectList" },
@@ -40,9 +36,9 @@ export default function Sidebar({ isAdmin, setIsAdmin }) {
             { name: faHouse },
         ];
     }
-    if (!isAdmin) {
+    if (!admin) {
         menus = [
-            { name: "프로젝트 조회", path: "/employee" },
+            { name: "프로젝트 조회", path: "/employee/projectList" },
             { name: "평가", path: `/employee/evaluation` },
             { name: "마이페이지", path: `/employee/mypage` },
         ];

@@ -3,14 +3,11 @@ import Header from "../../components/Molecules/Header/Header";
 import Sidebar from "../../components/Molecules/Sidebar/Sidebar";
 import Label from "../../components/Atoms/Label/Label";
 import { useLocation } from "react-router-dom";
+import instance from "../../api/fetch";
+import requests from "../../api/requests";
+import puts from "../../api/puts";
 
 export default function MyPage() {
-    const location = useLocation();
-    useEffect(() => {
-        const admin = location.pathname.startsWith("/manager");
-        console.log(admin + "ddd");
-    });
-
     const [isAdmin, setIsAdmin] = useState(null);
 
     const role = isAdmin ? "경영인" : "직원";
@@ -22,6 +19,7 @@ export default function MyPage() {
         phoneNumber: "",
         email: "",
         rank: "",
+        position: "",
         skill: "",
     });
 
@@ -33,37 +31,50 @@ export default function MyPage() {
     };
 
     useEffect(() => {
-        fetchGetInfo();
+        fetchGetUserInfo();
     }, []);
 
-    const fetchGetInfo = async () => {
-        const request = await fetch(
-            "https://2d55b3a9-65f0-40be-9a3b-9348ac5d5303.mock.pstmn.io/info"
-        );
+    const fetchGetUserInfo = async () => {
+        const request = await fetch(instance.baseURL + requests.fetchUserInfo, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                Authorization: `Bearer ` + localStorage.getItem("login-token"),
+            },
+        });
 
-        if (request.status === 400 || request.status === 500) {
-            // throw await makeError(response)
-        }
         const response = await request.json();
-        console.log(response);
+        console.log("response", response);
         setUserInfo(response);
+        console.log(userInfo);
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
+        alert("저장되었습니다!");
         setIsEditing(false);
+        console.log("수정된 값", userInfo);
+        try {
+            fetch(instance.baseURL + puts.fetchUserInfo, {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json",
+                    Authorization:
+                        `Bearer ` + localStorage.getItem("login-token"),
+                },
+                body: JSON.stringify(userInfo),
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     if (isEditing) {
         return (
             <div>
-                <Header role={role} isAdmin={isAdmin}></Header>
+                <Header></Header>
 
                 <div className="grid grid-cols-6 mx-auto">
-                    <Sidebar
-                        className="col-span-1"
-                        isAdmin={isAdmin}
-                        setIsAdmin={setIsAdmin}
-                    ></Sidebar>
+                    <Sidebar className="col-span-1"></Sidebar>
                     <div className="bg-gray-100 col-span-5 h-screen px-20 pt-10 auto-rows-auto drop-shadow-md">
                         <div className="bg-white drop-shadow-md container w-5/6 h-4/5 mx-40 rounded border border-gray-300 px-5">
                             <div className="text-2xl font-medium pt-10 pb-4 text-start">
@@ -121,14 +132,14 @@ export default function MyPage() {
                                     <div className="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                         <Label value="직급" />
                                         <div className="text-md leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                            수석
+                                            {userInfo.rank}
                                         </div>
                                     </div>
 
                                     <div className="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                         <Label value="포지션" />
                                         <div className="text-md leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                            개발자
+                                            {userInfo.position}
                                         </div>
                                     </div>
                                 </div>
@@ -153,7 +164,7 @@ export default function MyPage() {
                                 <button
                                     type="submit"
                                     className="flex w-1/5 justify-center rounded-md bg-sub-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-main-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    onClick={() => alert("저장되었습니다!")}
+                                    onClick={handleSave}
                                 >
                                     저장하기
                                 </button>
@@ -166,7 +177,7 @@ export default function MyPage() {
     } else {
         return (
             <div>
-                <Header role={role} isAdmin={isAdmin}></Header>
+                <Header></Header>
 
                 <div className="grid grid-cols-6 mx-auto">
                     <Sidebar

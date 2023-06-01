@@ -1,56 +1,158 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DetailEvaluation from "../../components/Organisms/DetailEvaluation";
 import Header from "../../components/Molecules/Header/Header";
 import RadioInput from "../../components/Atoms/Input/RadioInput";
 import Sidebar from "../../components/Molecules/Sidebar/Sidebar";
+import instance from "../../api/fetch";
+import requests from "../../api/requests";
+import { useRecoilState } from "recoil";
+import {
+    adminState,
+    checkInfoState,
+    evaluationInfoQuestionState,
+    projectInfoState,
+    surveyScoreState,
+} from "../../hooks/recoil/atoms";
+import posts from "../../api/posts";
 
 export default function EvaluationPage() {
-    const pjs = ["신한은행 앱 제작", "공공플랫폼 운영", "복지재단 앱 제작"];
-    const evals = ["동료평가", "PM 평가", "발주처평가"];
-    const employeeInfo = [
-        { employeeNumber: "181235", employeeName: "홍길동" },
-        { employeeNumber: "152134", employeeName: "박보영" },
-        { employeeNumber: "181230", employeeName: "이도현" },
-        { employeeNumber: "181225", employeeName: "김찰리" },
-    ];
+    const [surveyScore, setSurveyScore] = useRecoilState(surveyScoreState);
 
-    const employeeQues = [
-        "해당 직원이 주어진 업무를 충실히 수행했습니까?",
-        "해당 직원이 다른 팀원들과 적극적으로 소통했습니까?",
-        "해당 직원의 전체적인 평가 내용을 작성해주세요.",
-    ];
+    const [isAdmin, setIsAdmin] = useRecoilState(adminState);
 
-    const clientQeus = [
-        "발주한 프로젝트에 대한 결과물은 만족하셨나요?",
-        "프로젝트를 진행했던 참여사 직원들과의 소통은 원활하셨나요?",
-        "발주한 프로젝트에 대한 전체적인 평가를 해주세요.",
-    ];
+    const [isSelect, setSelect] = useState(false);
+
+    const [isDone, setIsDone] = useState(false);
+
+    const [comment, setComment] = useState("");
+
+    const [evaluation, setEvaluation] = useState([
+        {
+            projectId: "",
+            projectName: "",
+            evaluationType: [],
+            coworker: [],
+        },
+    ]);
+
+    const [coworker, setCoworker] = useState([]);
+
+    const [checkInfo, setCheckInfo] = useRecoilState(checkInfoState);
+
+    const [question, setQuestion] = useRecoilState(evaluationInfoQuestionState);
+    const [projectInfo, setProjectInfo] = useRecoilState(projectInfoState);
+
+    const [sendData, setSendData] = useState({
+        projectId: "",
+        evaluatedId: "",
+        type: "",
+        performance: "",
+        communication: "",
+        contents: "",
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const all = await fetchPossibleEvaluateProject();
+            setEvaluation(all);
+            // console.log("지금은 왔나?????????????", all);
+            setCoworker();
+            // console.log("뭔데", evaluation[0].coworker);
+            console.log("지금 선택", selectedProject);
+            console.log("comment", comment);
+
+            sendData.projectId = projectInfo.id;
+            sendData.evaluatedId = checkInfo.evaluatedId;
+            sendData.type = checkInfo.evaluationType;
+            sendData.performance = surveyScore.performance;
+            sendData.communication = surveyScore.communication;
+            sendData.contents = comment;
+            console.log("Sdfksdjfkjsdkfjhs", sendData);
+        };
+        fetchData();
+    }, []);
+
+    const [selectedProject, setSelectedProject] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
         alert("저장되었습니다!");
+        sendData.projectId = projectInfo.id;
+        sendData.evaluatedId = checkInfo.evaluatedId;
+        sendData.type = checkInfo.evaluationType;
+        sendData.performance = surveyScore.performance;
+        sendData.communication = surveyScore.communication;
+        sendData.contents = comment;
+        console.log("제대로 되는가 ㅜㅜㅜㅜㅜ", sendData);
+        // console.log("cklsjdl", checkInfo);
+        setIsDone(true);
+        fetchSendEvaluation();
     };
-    // 발주처 평가는 해당 프로젝트의 pm인지 확인 후  .. 일단은 임시
 
-    const [pj, setPj] = useState("");
-    const [evalType, setEvalType] = useState("");
-    const [emplyee, setEmployee] = useState("");
-    const [isSelect, setSelect] = useState(false);
+    const handleProjectSelect = (e) => {
+        // console.log("value", e.target.value);
+        const projectId = parseInt(e.target.value, 10);
+        // console.log("evaluation", evaluation); // 여기에서 출력
+        const foundProject = evaluation.find(
+            (project) => project.projectId === projectId
+        );
 
-    const [isAdmin, setIsAdmin] = useState(null);
+        // console.log("ddd", foundProject);
+        setSelectedProject(foundProject);
+        console.log("Selected Project:", foundProject);
+    };
 
-    const role = isAdmin ? "경영인" : "직원";
+    // const fetchManpowerEvaluation = as;
+    const fetchPossibleEvaluateProject = async () => {
+        try {
+            const request = await fetch(
+                instance.baseURL + requests.fetchPossibleEvaluateProject,
+                {
+                    method: "GET",
+                    headers: {
+                        "content-type": "application/json",
+                        Authorization:
+                            `Bearer ` + localStorage.getItem("login-token"),
+                    },
+                }
+            );
+            const response = await request.json();
+            // console.log("응답ㄷ이 잘 갔다", response);
+            return response.canEvaluateProjectList;
+
+            // console.log(response.canEvaluateProjectList, "평가옴");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchSendEvaluation = async () => {
+        try {
+            const request = await fetch(
+                instance.baseURL + posts.fetchSendEvaluation,
+                {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                        Authorization:
+                            `Bearer ` + localStorage.getItem("login-token"),
+                    },
+                    body: JSON.stringify(sendData),
+                }
+            );
+            const response = await request;
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div>
-            <Header role={role} isAdmin={isAdmin}></Header>
+            <Header></Header>
 
             <div className="grid grid-cols-6 mx-auto">
-                <Sidebar
-                    className="col-span-1"
-                    isAdmin={isAdmin}
-                    setIsAdmin={setIsAdmin}
-                ></Sidebar>
+                <Sidebar className="col-span-1"></Sidebar>
                 <div className="bg-gray-100 col-span-5 h-screen px-20 pt-10 auto-rows-auto">
                     <div className="bg-white drop-shadow-md container w-5/6 h-5/6 mx-40 rounded border border-gray-300 px-5 mb-20">
                         <div className="flex justify-between pt-10 pb-3">
@@ -68,15 +170,18 @@ export default function EvaluationPage() {
                         <section className=" justify-start place-content-between h-16 px-2 border border-gray-300 drop-shadow-sm rounded align-center">
                             <div className="flex mt-2.5 mb-4">
                                 <select
-                                    onChange={(e) => setPj(e.target.value)}
-                                    value={pj}
+                                    onChange={handleProjectSelect}
                                     id="position"
                                     name="position"
                                     className="px-2 block w-max rounded-md border-1.5 border-gray-300 px py-2.5 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 >
-                                    {pjs.map((item) => (
-                                        <option value={item} key={item}>
-                                            {item}
+                                    <option>-- 선택 --</option>
+                                    {evaluation.map((project) => (
+                                        <option
+                                            key={project.projectId}
+                                            value={project.projectId}
+                                        >
+                                            {project.projectName}
                                         </option>
                                     ))}
                                 </select>
@@ -89,12 +194,7 @@ export default function EvaluationPage() {
                                 </button>
                                 {isSelect && (
                                     <DetailEvaluation
-                                        evals={evals}
-                                        evalType={evalType}
-                                        setEvalType={setEvalType}
-                                        employee={emplyee}
-                                        setEmployee={setEmployee}
-                                        employeeInfo={employeeInfo}
+                                        selectedProject={selectedProject}
                                     />
                                 )}
                             </div>
@@ -107,7 +207,7 @@ export default function EvaluationPage() {
                                             프로젝트명
                                         </div>
                                         <div className="pl-5 mt-1">
-                                            눈누난나
+                                            {projectInfo.name}
                                         </div>
                                     </div>
                                     <div className="flex text-sm">
@@ -115,7 +215,7 @@ export default function EvaluationPage() {
                                             프로젝트 코드
                                         </span>
                                         <span className="pl-5 mt-1">
-                                            189283
+                                            {projectInfo.projectNumber}
                                         </span>
                                     </div>
                                 </div>
@@ -125,7 +225,7 @@ export default function EvaluationPage() {
                                             발주처
                                         </span>
                                         <span className="pl-5 mt-1">
-                                            삼성전자
+                                            {projectInfo.client}
                                         </span>
                                     </div>
                                     <div className="flex">
@@ -133,34 +233,41 @@ export default function EvaluationPage() {
                                             예산
                                         </span>
                                         <span className="pl-5 mt-1">
-                                            100,000,000
+                                            {projectInfo.budget}
                                         </span>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        <section className="mt-2 h-80 pl-4 pr-4 border border-gray-300 drop-shadow-sm rounded align-center">
-                            <div className="pt-3 pb-1 border-b-2 border-gray-300">
-                                문항을 읽고 가장 적절한 곳에 체크 해 주세요.
-                            </div>
-                            <div className="question mt-2">
-                                <div>
-                                    1. 해당 직원이 주어진 업무를 충실히
-                                    수행했습니까?
+
+                        {isDone && (
+                            <section className="mt-2 h-80 flex justify-center items-center pl-4 pr-4 border border-gray-300 drop-shadow-sm rounded align-center">
+                                <div className="pt-3 pb-1">
+                                    평가를 이미 완료하셨습니다.
                                 </div>
-                                <RadioInput />
-                                <div>
-                                    2. 해당 직원이 다른 팀원들과 적극적으로
-                                    소통했습니까?
+                            </section>
+                        )}
+                        {!isDone && (
+                            <section className="mt-2 h-80 pl-4 pr-4 border border-gray-300 drop-shadow-sm rounded align-center">
+                                <div className="pt-3 pb-1 border-b-2 border-gray-300">
+                                    문항을 읽고 가장 적절한 곳에 체크 해 주세요.
                                 </div>
-                                <RadioInput />
-                                <div>
-                                    3. 해당 직원의 전체적인 평가 내용을
-                                    작성해주세요.
+                                <div className="question mt-2">
+                                    <div>1. {question.communication}</div>
+                                    <RadioInput name="performance" />
+                                    <div>2.{question.performance}</div>
+                                    <RadioInput name="communication" />
+                                    <div>3.{question.content}</div>
+                                    <input
+                                        className="h-16 w-full rounded border border-gray-300 mt-2 mr-5"
+                                        onChange={(e) => {
+                                            setComment(e.target.value);
+                                            // console.log("comment", comment);
+                                        }}
+                                    ></input>
                                 </div>
-                                <input className="h-16 w-full rounded border border-gray-300 mt-2 mr-5"></input>
-                            </div>
-                        </section>
+                            </section>
+                        )}
                     </div>
                 </div>
             </div>

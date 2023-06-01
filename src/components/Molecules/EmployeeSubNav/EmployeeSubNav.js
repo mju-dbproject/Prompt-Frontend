@@ -8,6 +8,11 @@ import { allEmployeesState } from "../../../hooks/recoil/atoms";
 import "../Subnav/SubNav.css";
 
 export default function EmployeeSubNav({ subTitle, isAdmin }) {
+    const [empTitle, setEmpTitle] = useState([
+        { title: "전체", total: "", name: "all" },
+        { title: "개발자", total: "", name: "developer" },
+        { title: "기타", total: "", name: "noDeveloper" },
+    ]);
     const [activeIndex, setActiveIndex] = useState(null);
 
     const [searchParams, setSearchParams] = useSearchParams({
@@ -18,7 +23,14 @@ export default function EmployeeSubNav({ subTitle, isAdmin }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const employees = await fetchEmployeeDeveloper();
+            const count = await fetchEmployeeCount();
+            setEmpTitle((prevSubTitle) =>
+                prevSubTitle.map((item, index) => ({
+                    ...item,
+                    total: count[item.name],
+                }))
+            );
+            const employees = await fetchGetAllEmployee();
             setAllEmployees(employees);
             // setAllProjects(data);
             // setSelectedEmployee([]);
@@ -26,6 +38,27 @@ export default function EmployeeSubNav({ subTitle, isAdmin }) {
         };
         fetchData();
     }, []);
+
+    const fetchEmployeeCount = async () => {
+        try {
+            const request = await fetch(
+                instance.baseURL + requests.fetchEmployeeCount,
+                {
+                    method: "GET",
+                    headers: {
+                        "content-type": "application/json",
+                        Authorization:
+                            `Bearer ` + localStorage.getItem("login-token"),
+                    },
+                }
+            );
+            const response = await request.json();
+            console.log(response, "제대로 오는가 개수가..");
+            return response;
+        } catch (error) {
+            console.log("error is", error);
+        }
+    };
 
     const handleButtonClick = async (sub, index) => {
         // Create the query parameter string
@@ -42,6 +75,8 @@ export default function EmployeeSubNav({ subTitle, isAdmin }) {
             setAllEmployees(all);
         }
         setActiveIndex(index);
+
+        setSearchParams({ status: sub.searchTerm });
     };
     const fetchGetAllEmployee = async () => {
         try {
@@ -57,6 +92,7 @@ export default function EmployeeSubNav({ subTitle, isAdmin }) {
                 }
             );
             const response = await request.json();
+            console.log("sdf", response);
             setAllEmployees(response.employees);
             return response.employees;
         } catch (error) {
@@ -109,7 +145,7 @@ export default function EmployeeSubNav({ subTitle, isAdmin }) {
 
     return (
         <section className="subNav bg-white w-6/7 grid grid-cols-5 border border-gray-300 drop-shadow-md rounded pl-7">
-            {subTitle.map((sub, index) => (
+            {empTitle.map((sub, index) => (
                 <button
                     key={index}
                     className={

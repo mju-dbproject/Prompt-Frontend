@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 import posts from "../../api/posts";
 import instance from "../../api/fetch";
 import { useRecoilState, useResetRecoilState } from "recoil";
-import { joinInfoState } from "../../hooks/recoil/atoms";
+import { availableIdState, joinInfoState } from "../../hooks/recoil/atoms";
 
 export default function JoinPage() {
     const [pwType, setPwType] = useState({
@@ -23,10 +23,9 @@ export default function JoinPage() {
 
     const stepperRef = useRef(null);
 
-    const [availableId, setAvailableId] = useState(true);
+    const [availableId, setAvailableId] = useRecoilState(availableIdState);
     const [correspondPassword, setCorrespondPassword] = useState(true);
 
-    const educationList = ["고등학교", "대학교", "석사", "박사"];
     const positionList = [
         "개발자",
         "영업관리",
@@ -35,7 +34,7 @@ export default function JoinPage() {
         "마케팅",
         "연구개발",
     ];
-    const rankList = ["수석", "책임", "선임", "전임"];
+    const rankList = ["수석", "책임", "선임", "사원"];
 
     const [joinInfo, setJoinInfo] = useRecoilState(joinInfoState);
     const reset = useResetRecoilState(joinInfoState);
@@ -47,24 +46,25 @@ export default function JoinPage() {
         });
     }, []);
 
+    const handleCheck = () => {
+        validatePassword();
+        if (availableId && joinInfo.password === joinInfo.repassword) {
+            stepperRef.current.next();
+        }
+    };
+
     const handleIdValidation = async () => {
         try {
-            const response = await fetch(
-                instance.baseURL + posts.fetchIDCheck,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ userId: joinInfo.userId }),
-                }
-            );
-            const validation = await response.json();
-            setAvailableId(validation);
-            validatePassword();
-            if (validation && joinInfo.password === joinInfo.repassword) {
-                stepperRef.current.next();
-            }
+            const request = await fetch(instance.baseURL + posts.fetchIDCheck, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ userId: joinInfo.userId }),
+            });
+            const response = await request.json();
+            setAvailableId(response.notDuplicated);
+            handleCheck();
         } catch (error) {
             console.log("error occur");
         }
@@ -79,14 +79,17 @@ export default function JoinPage() {
     };
     const handleSubmit = async () => {
         try {
+            const dataToSend = { ...joinInfo };
+            delete dataToSend.repassword;
             const response = await fetch(instance.baseURL + posts.fetchJoin, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(joinInfo),
+                body: JSON.stringify(dataToSend),
             });
-            console.log(joinInfo);
+            console.log(dataToSend);
+            console.log(response);
             reset();
             navigate("/login");
         } catch (error) {
@@ -95,10 +98,18 @@ export default function JoinPage() {
     };
 
     const handleValueChange = (e) => {
-        setJoinInfo({
-            ...joinInfo,
-            [e.target.name]: e.target.value,
-        });
+        if (e.target.name === "experienceYear") {
+            setJoinInfo({
+                ...joinInfo,
+                [e.target.name]: parseInt(e.target.value, 10),
+            });
+        } else {
+            setJoinInfo({
+                ...joinInfo,
+                [e.target.name]: e.target.value,
+            });
+        }
+
         // console.log("hi", e.target.value);
     };
 
@@ -153,6 +164,7 @@ export default function JoinPage() {
                                             <Input
                                                 name="userId"
                                                 type="text"
+                                                page="join"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
@@ -174,6 +186,7 @@ export default function JoinPage() {
                                             <Input
                                                 name="password"
                                                 type={pwType.type}
+                                                page="join"
                                             />
                                             <PwdIcon
                                                 pwType={pwType}
@@ -190,6 +203,7 @@ export default function JoinPage() {
                                         <div className="mt-2.5 relative">
                                             <Input
                                                 name="repassword"
+                                                page="join"
                                                 type={pwType.type}
                                                 onChange={(e) => {
                                                     handleValueChange(e);
@@ -231,6 +245,7 @@ export default function JoinPage() {
                                             <Input
                                                 name="name"
                                                 type="text"
+                                                page="join"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
@@ -238,15 +253,16 @@ export default function JoinPage() {
                                         </div>
 
                                         <label
-                                            htmlFor="registration-number"
+                                            htmlFor="registerNumber"
                                             className="block text-base font-medium leading-6 text-gray-900"
                                         >
-                                            주민등록번호를 입력하세요 (-제외)
+                                            주민등록번호를 입력하세요 (-로 구분)
                                         </label>
                                         <div className="mt-2 mb-4">
                                             <Input
-                                                name="registrationNumber"
+                                                name="registerNumber"
                                                 type="password"
+                                                page="join"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
@@ -264,6 +280,7 @@ export default function JoinPage() {
                                                 name="email"
                                                 type="email"
                                                 required
+                                                page="join"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
@@ -279,6 +296,7 @@ export default function JoinPage() {
                                             <Input
                                                 name="phoneNumber"
                                                 type="text"
+                                                page="join"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
@@ -295,6 +313,7 @@ export default function JoinPage() {
                                             <Input
                                                 name="education"
                                                 type="text"
+                                                page="join"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
@@ -324,6 +343,7 @@ export default function JoinPage() {
                                             <Input
                                                 name="experienceYear"
                                                 type="text"
+                                                page="join"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }
@@ -345,11 +365,14 @@ export default function JoinPage() {
                                                 name="position"
                                                 className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             >
-                                                {positionList.map((item) => (
-                                                    <option key={item}>
-                                                        {item}
-                                                    </option>
-                                                ))}
+                                                <option>-- 선택 --</option>
+                                                {positionList.map(
+                                                    (item, index) => (
+                                                        <option key={index}>
+                                                            {item}
+                                                        </option>
+                                                    )
+                                                )}
                                             </select>
                                         </div>
 
@@ -368,8 +391,9 @@ export default function JoinPage() {
                                                 name="rank"
                                                 className="px-2 block w-full rounded-md border border-zinc-300 px py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             >
-                                                {rankList.map((item) => (
-                                                    <option key={item}>
+                                                <option>-- 선택 --</option>
+                                                {rankList.map((item, index) => (
+                                                    <option key={index}>
                                                         {item}
                                                     </option>
                                                 ))}
@@ -387,6 +411,7 @@ export default function JoinPage() {
                                             <Input
                                                 name="skill"
                                                 type="text"
+                                                page="join"
                                                 onChange={(e) =>
                                                     handleValueChange(e)
                                                 }

@@ -10,6 +10,8 @@ const posts = {
     fetchProjectNew: "/api/admin/project",
     fetchProjectEdit: "/api/admin/project",
     fetchManpowerEvaluation: "//api/evaluation/save",
+    fetchPossibleEvaluateCheck: "/api/evaluation/check",
+    fetchSendEvaluation: "/api/evaluation",
     fetchManpowerAddition: "/api/manpower/{project_id}",
     fetchManpowerPossibleList: "/api/manpower/available/1",
 };

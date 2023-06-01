@@ -9,7 +9,7 @@ import ProjectTable from "../Atoms/Table/ProjectTable";
 
 import EmployeePjNav from "../Molecules/EmployeePjNav/EmployeePjNav";
 
-export default function Main({ subTitle, employeeTitle, cols }) {
+export default function ManagerMain({ subTitle, employeeTitle, cols }) {
     const [selectedDate, setSelectedDate] = useState(null);
 
     const [allProjects, setAllProjects] = useRecoilState(allProjectsState);
@@ -26,10 +26,7 @@ export default function Main({ subTitle, employeeTitle, cols }) {
 
     return (
         <div className="col-span-5 h-screen px-16 py-10 bg-gray-100 ">
-            <EmployeePjNav
-                subTitle={subTitle}
-                isAdmin={isAdmin}
-            ></EmployeePjNav>
+            <SubNav subTitle={subTitle} isAdmin={isAdmin}></SubNav>
             {isAdmin && (
                 <section className="relative z-10 flex bg-white drop-shadow-md items-center place-content-between h-16 mt-3 px-5 border border-slate-200 rounded">
                     <DatePick onChange={handleDateChange} />

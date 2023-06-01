@@ -16,7 +16,7 @@ export default function DatePick() {
     const [sendEnd, setSendEnd] = useRecoilState(setSendEndState);
 
     useEffect(() => {
-        console.log("start date", startDate);
+        console.log("start date", sendStart);
     });
 
     return (
@@ -29,9 +29,14 @@ export default function DatePick() {
                     placeholderText="----년 --월 --일"
                     selected={startDate}
                     onChange={(date) => {
-                        const d = new Date(date).toISOString();
-                        console.log("시작날짜", d.split("T")[0]);
-                        setSendStart(d.split("T")[0]);
+                        const d = new Date(date).toLocaleDateString();
+                        const dates = d.split(".");
+
+                        const year = parseInt(dates[0].trim());
+                        const month = parseInt(dates[1].trim());
+                        const day = parseInt(dates[2].trim());
+                        // console.log(`${year}-${month}-${day}`);
+                        setSendStart(`${year}-${month}-${day}`);
                         setStartDate(date);
                     }}
                     selectsStart
@@ -46,9 +51,14 @@ export default function DatePick() {
                     placeholderText="----년 --월 --일"
                     selected={endDate}
                     onChange={(date) => {
-                        const d = new Date(date).toISOString();
-                        console.log("시작날짜", d.split("T")[0]);
-                        setSendEnd(d.split("T")[0]);
+                        const d = new Date(date).toLocaleDateString();
+                        const dates = d.split(".");
+
+                        const year = parseInt(dates[0].trim());
+                        const month = parseInt(dates[1].trim());
+                        const day = parseInt(dates[2].trim());
+                        // console.log(`${year}-${month}-${day}`);
+                        setSendEnd(`${year}-${month}-${day}`);
                         setEndDate(date);
                     }}
                     selectsEnd
