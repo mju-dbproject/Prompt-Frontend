@@ -47,9 +47,9 @@
 
 <img width="1512" alt="KakaoTalk_Photo_2023-06-02-22-48-18" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/e356b359-d40b-45b9-82eb-5451d39b9714">
 
-
 <img width="1512" alt="KakaoTalk_Photo_2023-06-02-22-47-52" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/d134d4d9-e815-40cd-93fc-12da826a0b0b">
 
+<img width="1508" alt="KakaoTalk_Photo_2023-06-02-22-50-03" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/b6f9d287-e0fc-460b-a7d8-14eb6138c755">
 
 <img width="1512" alt="스크린샷 2023-06-01 오전 9 34 22" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/4eb5e6e5-a77b-4cbc-8ba5-55d693097871">
 
