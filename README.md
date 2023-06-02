@@ -10,7 +10,6 @@
 + 추후  ID찾기/패스워드 재설정 화면 개발 및 기능 구현완료하였음
 
 
-<img width="597" alt="스크린샷 2023-06-02 오후 10 12 47" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/63b22a3f-d618-4aff-b761-f6f580aabc4b">
 
 ### 경영진
 
