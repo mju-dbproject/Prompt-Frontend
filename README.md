@@ -3,12 +3,17 @@
 
 
 ## 프로젝트 요구사항 정의서
+### 공통
 
-<img width="721" alt="스크린샷 2023-06-02 오후 9 56 17" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/cbfc2707-5c5f-41ce-b0fe-00a3306f0e83">
+<img width="597" alt="스크린샷 2023-06-02 오후 10 12 47" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/63b22a3f-d618-4aff-b761-f6f580aabc4b">
 
-<img width="741" alt="스크린샷 2023-06-02 오후 9 56 23" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/d93e84ef-5499-41e5-bd24-b2acf73ebd0b">
+### 경영진
 
-<img width="735" alt="스크린샷 2023-06-02 오후 9 56 28" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/523aeb78-c91e-40a4-87c6-87250c2deafc">
+<img width="597" alt="스크린샷 2023-06-02 오후 10 12 55" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/724cfa10-3eac-4caa-8564-7bfb0da7e2b1">
+
+### 직원
+
+<img width="597" alt="스크린샷 2023-06-02 오후 10 13 09" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/8b320775-a28c-427c-ba90-1a136101b647">
 
 
 
