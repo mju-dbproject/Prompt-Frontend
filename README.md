@@ -24,7 +24,8 @@
 
 ## ERD
 
-![ERD](https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/cc876318-6fa6-4db8-9dd7-ea6a93fd49cc)
+<img width="597" alt="스크린샷 2023-06-02 오후 10 15 34" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/f76327c0-1623-4454-bd0c-3a306f9f3a38">
+
 
 ## Architecture
 
