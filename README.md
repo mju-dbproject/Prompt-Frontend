@@ -36,6 +36,24 @@
 <img width="752" alt="스크린샷 2023-06-02 오후 10 14 40" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/ccdb42a8-db52-479b-b4e6-aba2f2dbd81d">
 
 
+## Screen
+
+- 일부 화면 (공통, 경영진, 직원)
+
+<img width="1512" alt="KakaoTalk_Photo_2023-06-02-22-49-09" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/e07e0fc5-7f1f-4fa6-acfd-0c90860e175c">
+
+
+<img width="1512" alt="스크린샷 2023-06-01 오전 9 31 38" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/1fd62911-aeb6-4a91-895b-a68c72b74f99">
+
+<img width="1512" alt="KakaoTalk_Photo_2023-06-02-22-48-18" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/e356b359-d40b-45b9-82eb-5451d39b9714">
+
+
+<img width="1512" alt="KakaoTalk_Photo_2023-06-02-22-47-52" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/d134d4d9-e815-40cd-93fc-12da826a0b0b">
+
+
+<img width="1512" alt="스크린샷 2023-06-01 오전 9 34 22" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/4eb5e6e5-a77b-4cbc-8ba5-55d693097871">
+
+
 
 # Members
 
