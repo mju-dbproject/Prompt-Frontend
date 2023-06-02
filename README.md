@@ -7,6 +7,10 @@
 
 <img width="597" alt="스크린샷 2023-06-02 오후 10 12 47" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/63b22a3f-d618-4aff-b761-f6f580aabc4b">
 
++ 추후  ID찾기/패스워드 재설정 구현완료했음
+
+<img width="597" alt="스크린샷 2023-06-02 오후 10 12 47" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/63b22a3f-d618-4aff-b761-f6f580aabc4b">
+
 ### 경영진
 
 <img width="597" alt="스크린샷 2023-06-02 오후 10 12 55" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/724cfa10-3eac-4caa-8564-7bfb0da7e2b1">
