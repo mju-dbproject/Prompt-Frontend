@@ -1,7 +1,6 @@
 # Prompt-Frontend
 
 
-
 ## 프로젝트 요구사항 정의서
 ### 공통
 
@@ -40,6 +39,11 @@
 
 - 일부 화면 (공통, 경영진, 직원)
 
+
+<img width="1512" alt="스크린샷 2023-06-02 오후 11 05 12" src="https://github.com/chaeyeon-yang/Prompt-Frontend/assets/69382168/365d7d01-ab78-4a62-91a7-ad3d00377a3b">
+
+<img width="1512" alt="스크린샷 2023-06-02 오후 11 06 02" src="https://github.com/chaeyeon-yang/Prompt-Frontend/assets/69382168/5c9617a6-12c7-4b04-86aa-9189eb405f33">
+
 <img width="1512" alt="KakaoTalk_Photo_2023-06-02-22-49-09" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/e07e0fc5-7f1f-4fa6-acfd-0c90860e175c">
 
 
@@ -60,3 +64,4 @@
 | [![텍스트](https://avatars.githubusercontent.com/u/64758861?v=4)](https://github.com/stophwan) | [![텍스트](https://avatars.githubusercontent.com/u/98259433?v=4)](https://github.com/jisu-jeong0) | [![텍스트](https://avatars.githubusercontent.com/u/126501685?v=4)](https://github.com/YOONTAEKYUN) | [![텍스트](https://avatars.githubusercontent.com/u/69382168?v=4)](https://github.com/chaeyeon-yang) | 
 | :----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | 
 |                                         BE/정지환                                            |                                          BE/정지수                                           |                                            BE/윤태균                                            |                                                                   FE/양채연                                                                    |             
+
