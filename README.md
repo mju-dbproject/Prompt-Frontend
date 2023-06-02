@@ -28,7 +28,8 @@
 
 ## Architecture
 
-<img width="962" alt="스크린샷 2023-06-02 오후 9 51 27" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/97b3e728-dfe7-4634-acff-052d076484de">
+<img width="752" alt="스크린샷 2023-06-02 오후 10 14 40" src="https://github.com/mju-dbproject/Prompt-Frontend/assets/69382168/ccdb42a8-db52-479b-b4e6-aba2f2dbd81d">
+
 
 
 # 참여 인원 
